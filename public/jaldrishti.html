@@ -255,7 +255,7 @@ if(a=='go'){S.page=v;$('#sb').classList.remove('open');draw()}
 else if(a=='menu'){innerWidth<860?$('#sb').classList.toggle('open'):$('#sb').classList.toggle('sm')}
 else if(a=='zone'){S.zone=v;draw()}
 else if(a=='bell'){const d=$('#dd'),L=F.filter(f=>AL[f.id].st=='New').slice(0,6);d.innerHTML='<b>Notifications</b>'+(L.length?L.map(f=>`<div class="al ${f.sev}"><b>${f.type}</b> · ${E(f.z)}<br><span class="mu">${f.sev} · suspected</span></div>`).join('')+'<button class="b" data-a="go" data-v="leak">Open alerts</button>':'<p class="mu">No new alerts.</p>');d.hidden=!d.hidden}
-else if(a=='prof'){const d=$('#dd');d.innerHTML=`<b>Profile (demo roles)</b><p class="mu">There is no real login. Switch role to see staff or citizen views.</p><button class="b" data-a="role" data-v="staff">Staff</button><button class="b g2b" data-a="role" data-v="citizen">Citizen</button>`;d.hidden=!d.hidden}
+else if(a=='prof'){$('#dd').hidden=!$('#dd').hidden}
 else if(a=='pick'){const id=F[v].id;SEL.has(id)?SEL.delete(id):SEL.add(id);draw()}
 else if(a=='selall'){fil().forEach(f=>AL[f.id].st!='Repaired'&&SEL.add(f.id));draw()}
 else if(a=='disp'){if(!SEL.size){$('#wo-er').textContent=' Select at least one alert first.';return}const o=$('#wo-o').value,e=$('#wo-e').value,pr=$('#wo-p').value;
