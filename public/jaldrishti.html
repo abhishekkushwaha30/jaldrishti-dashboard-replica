@@ -71,7 +71,37 @@ th{font-family:var(--fh);font-size:.78rem;color:var(--mut)}
 .chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{background:rgba(255,255,255,.12);border-radius:10px;padding:6px 11px;font-size:.85rem}.chips b{display:block;font:700 1.25rem var(--fh);color:#7fe7f3}
 .orb{max-width:210px;margin:auto;width:100%}.wv{animation:wv 4s linear infinite}@keyframes wv{to{transform:translateX(60px)}}
 @media(prefers-reduced-motion:reduce){.wv{animation:none}}
+/* --- Government-portal masthead (demo) --- */
+.govbar{height:4px;background:linear-gradient(90deg,#ff9933 0 33%,#f5f5f5 33% 66%,#138808 66% 100%)}
+.gov{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 14px;background:var(--sf);border-bottom:1px solid var(--ln)}
+.gov .em{flex:none}
+svg.em{width:40px;height:40px;max-width:40px}
+.gov .gt b{display:block;font-size:1.02rem;color:var(--ink);line-height:1.25}
+.gov .gt span{display:block;font-size:.78rem;color:var(--mut)}
+.gov .who{display:flex;gap:10px;margin-left:auto;flex-wrap:wrap}
+.gov .who figure{margin:0;text-align:center;width:70px}
+.gov .who img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid #ff9933;display:block;margin:0 auto 3px;background:#fff}
+.gov .who figcaption{font-size:.62rem;color:var(--mut);line-height:1.25}
+.govnote{padding:4px 14px;font-size:.72rem;background:var(--nv);color:#ffe9c9;text-align:center}
+footer.govft{margin-top:18px;background:#05233a;color:#bcd7e4;padding:16px 14px;font-size:.85rem}
+footer.govft .fin{max-width:1200px;margin:auto;display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}
+footer.govft h4{margin:0 0 6px;color:#fff;font-size:.95rem}
+footer.govft p{margin:2px 0}
+footer.govft a{color:#8fd8e8;text-decoration:none}
+footer.govft .disc{max-width:1200px;margin:10px auto 0;padding-top:8px;border-top:1px solid #1b4152;font-size:.74rem;color:#8fb0c2}
+@media print{.govbar,.govnote,footer.govft{display:none}}
 </style></head><body>
+<div class="govbar"></div>
+<div class="gov">
+<svg class="em" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#ff9933" stroke-width="2.5"/><path d="M20 7c-5.5 8-9 12-9 17a9 9 0 0018 0c0-5-3.5-9-9-17z" fill="#138808"/><circle cx="20" cy="24.5" r="4" fill="#fff"/><path d="M20 21v7.5" stroke="#ff9933" stroke-width="1.6"/></svg>
+<div class="gt"><b>भारत सरकार · Government of India</b><span>जल शक्ति मंत्रालय · Ministry of Jal Shakti — JalDrishti 2.0 (Academic Demo)</span></div>
+<div class="who" aria-label="Public photographs of national leaders, academic demo only">
+<figure><img src="/img/president.jpg" alt="Smt. Droupadi Murmu"><figcaption>माननीय राष्ट्रपति<br>Smt. Droupadi Murmu</figcaption></figure>
+<figure><img src="/img/pm.jpg" alt="Shri Narendra Modi"><figcaption>माननीय प्रधानमंत्री<br>Shri Narendra Modi</figcaption></figure>
+<figure><img src="/img/minister.jpg" alt="Shri C. R. Paatil"><figcaption>जल शक्ति मंत्री<br>Shri C. R. Paatil</figcaption></figure>
+</div>
+</div>
+<div class="govnote">⚠ Academic Demo Project · यह सरकारी website नहीं है · Not an official Government of India website · NIET Greater Noida</div>
 <div id="app">
 <aside id="sb" aria-label="Main navigation"><div class="br"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-5px;margin-right:6px"><path d="M12 2C8 8 5 11 5 15a7 7 0 0014 0c0-4-3-7-7-13z" fill="#35cfe0"/><circle cx="12" cy="15" r="3.2" fill="#052c42"/><circle cx="13" cy="14" r="1" fill="#fff"/></svg>JalDrishti<small>जल दृष्टि · Smart Water Intelligence</small></div><nav id="nv"></nav></aside>
 <div id="mn">
@@ -87,6 +117,13 @@ th{font-family:var(--fh);font-size:.78rem;color:var(--mut)}
 <div id="dm" role="status"></div>
 <main id="view"></main>
 </div></div>
+<footer class="govft">
+<div class="fin">
+<div><h4>JalDrishti 2.0 — Smart Water Intelligence</h4><p>Academic Demo Project · जल जीवन मिशन के आंकड़े (01 Dec 2025, PIB) प्रदर्शन हेतु</p></div>
+<div><h4>Contact / संपर्क</h4><p>NIET College, Greater Noida</p><p>Abhishek Pathak — <a href="mailto:0251csml426@niet.co.in">0251csml426@niet.co.in</a></p><p>Abhishek Kushwaha — <a href="mailto:0251csml088@niet.co.in">0251csml088@niet.co.in</a></p></div>
+</div>
+<p class="disc">Disclaimer: यह एक शैक्षिक डेमो (Academic Prototype) है, कोई सरकारी website नहीं। नेताओं की photographs सार्वजनिक स्रोतों (Wikipedia/Wikimedia Commons) से ली गई हैं। Village-level sensor readings simulation हैं।</p>
+</footer>
 <script>
 const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const P=[.2,.15,.12,.12,.2,.5,1.1,1.5,1.3,1,.8,.8,.9,.8,.7,.7,.8,1,1.3,1.4,1.1,.8,.5,.3];
