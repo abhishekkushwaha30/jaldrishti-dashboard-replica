@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JalDrishti 2.0 – Smart Water Intelligence</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Hind:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#eef4f7;--sf:#fff;--ink:#0a1f33;--mut:#587083;--ln:#d3e0e8;--ac:#0b8fa3;--hi:#c62f2f;--md:#c97a06;--lw:#2f7fc6;--ok:#1d8a4b;--nv:#0a1f33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08151f;--sf:#0f2535;--ink:#e2eef5;--mut:#8ca7b8;--ln:#21404f;--ac:#3cc4d8;--hi:#ff6e6e;--md:#f4a73b;--lw:#6db3f2;--ok:#4cc884;--nv:#061018}}
+:root[data-theme="dark"]{--bg:#08151f;--sf:#0f2535;--ink:#e2eef5;--mut:#8ca7b8;--ln:#21404f;--ac:#3cc4d8;--hi:#ff6e6e;--md:#f4a73b;--lw:#6db3f2;--ok:#4cc884;--nv:#061018}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI","Trebuchet MS",system-ui,sans-serif}
+#app{display:flex;min-height:100vh}
+aside{width:220px;background:var(--nv);color:#cfe6ef;padding:14px 8px;flex:none;transition:width .2s;position:sticky;top:0;height:100vh;overflow:auto}
+aside.sm{width:60px}aside.sm .lb,aside.sm .br small{display:none}
+.br{padding:4px 8px 14px;color:#fff;font-weight:700;font-size:1.15rem}.br small{display:block;font-weight:400;color:#7fb4c6;font-size:.72rem}
+aside button.n{display:flex;gap:10px;align-items:center;width:100%;background:none;border:0;color:inherit;padding:9px 10px;border-radius:8px;font:inherit;cursor:pointer;text-align:left}
+aside button.n.on{background:#12405a;color:#fff}aside button.n:hover{background:#0f3248}
+#mn{flex:1;min-width:0}
+header{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px;background:var(--sf);border-bottom:1px solid var(--ln);position:sticky;top:0;z-index:5}
+header input,header select,.in{background:var(--bg);color:var(--ink);border:1px solid var(--ln);border-radius:8px;padding:7px 9px;font:inherit;max-width:100%}
+header input{flex:1;min-width:120px}
+.ib{background:var(--bg);border:1px solid var(--ln);color:var(--ink);border-radius:8px;padding:7px 10px;cursor:pointer;font:inherit;position:relative}
+.bd{position:absolute;top:-6px;right:-6px;background:var(--hi);color:#fff;border-radius:9px;font-size:.7rem;padding:0 5px}
+.dd{position:absolute;right:14px;top:56px;width:min(340px,92vw);background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:10px;box-shadow:0 8px 24px #0004;z-index:9}
+#dm{padding:5px 14px;font-size:.8rem;background:var(--nv);color:#cfe6ef;text-align:center}
+#dm.c{background:#0f3a4a}
+main{padding:14px;max-width:1200px;margin:auto;display:grid;gap:12px}
+h2{margin:0 0 4px;font-size:1.3rem}h3{margin:0 0 8px;font-size:1rem}
+.bx{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:13px;min-width:0}
+.g{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.g2{display:grid;gap:12px;grid-template-columns:3fr 2fr}@media(max-width:860px){.g2{grid-template-columns:1fr}aside{position:fixed;z-index:20;left:-240px;transition:left .2s}aside.open{left:0}aside.sm{width:220px}aside.sm .lb{display:inline}}
+.k b{font-size:1.6rem;display:block}.k span,.mu{color:var(--mut);font-size:.85rem}
+.zt{border:2px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:9px;padding:9px;text-align:left;font:inherit;cursor:pointer}
+.zt.on{border-color:var(--ac)}
+.dt{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;background:var(--ok)}
+.High{--c:var(--hi)}.Medium{--c:var(--md)}.Low{--c:var(--lw)}.Normal{--c:var(--ok)}
+.dt.High,.dt.Medium,.dt.Low,.dt.Normal{background:var(--c)}
+.tg{font-size:.75rem;font-weight:700;padding:1px 8px;border-radius:9px;background:var(--c,var(--ln));color:#fff;margin-left:6px}
+.tg.n{background:var(--ln);color:var(--ink)}
+.al{border-left:5px solid var(--c);background:var(--bg);border-radius:0 9px 9px 0;padding:10px;margin-bottom:10px}
+.al ul{margin:4px 0 6px 18px;padding:0}
+button.b{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:8px 13px;font:inherit;font-weight:700;cursor:pointer;margin:4px 6px 0 0}
+button.b.g2b{background:none;color:var(--ink);border:1px solid var(--ln)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:560px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ln)}
+.fr{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.fr label{display:grid;gap:2px;font-size:.8rem;color:var(--mut)}
+textarea.in{width:100%;min-height:100px;font:.82rem Consolas,monospace}
+.bar{display:grid;grid-template-columns:90px 1fr 54px;gap:8px;align-items:center;margin:5px 0;font-size:.88rem}.bar i{display:block;height:14px;border-radius:4px;background:var(--c,var(--ac))}
+svg{width:100%;height:auto;display:block}.lg{display:flex;gap:12px;flex-wrap:wrap;font-size:.82rem;color:var(--mut)}
+.tl{font-size:.8rem;color:var(--mut);border-left:2px solid var(--ln);padding-left:8px;margin:6px 0}
+.er{color:var(--hi);font-size:.85rem}.ok{color:var(--ok)}
+.mz{cursor:pointer}.mz:focus-visible rect{stroke-width:4}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+@media print{aside,header,#dm .noprint,.noprint{display:none!important}body{background:#fff}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:root{--bg:#e6f2f4;--sf:#ffffffee;--ink:#062a3b;--mut:#4a6b7b;--ln:#c9dfe5;--ac:#07899a;--nv:#052c42;--sa:#e8801a;--fh:"Sora","Hind","Segoe UI",sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#04141d;--sf:#0b2634ee;--ink:#e6f3f7;--mut:#92b3c2;--ln:#1b4152;--ac:#35cfe0;--nv:#031019;--sa:#ffa24a}}
+:root[data-theme="dark"]{--bg:#04141d;--sf:#0b2634ee;--ink:#e6f3f7;--mut:#92b3c2;--ln:#1b4152;--ac:#35cfe0;--nv:#031019;--sa:#ffa24a}
+body{font-family:"Hind","Segoe UI",system-ui,sans-serif;font-size:16px;background-color:var(--bg);background-image:radial-gradient(circle at 12% 0%,rgba(7,137,154,.2),transparent 42%),radial-gradient(circle at 95% 35%,rgba(232,128,26,.1),transparent 38%),repeating-radial-gradient(circle at 85% 115%,transparent 0 26px,rgba(7,137,154,.07) 26px 28px);background-attachment:fixed}
+h2,h3,.k b,.br{font-family:var(--fh)}h2{font-size:1.55rem;letter-spacing:-.3px}
+aside{background:linear-gradient(180deg,#052c42 0%,#06465c 70%,#07566a 100%)}
+aside button.n.on{background:rgba(53,207,224,.18);box-shadow:inset 3px 0 0 var(--sa)}
+header{background:var(--sf);backdrop-filter:blur(8px)}
+.bx{border-radius:14px;box-shadow:0 6px 22px rgba(5,44,66,.08);backdrop-filter:blur(6px)}
+.k{border-top:3px solid var(--ac)}.k b{font-size:1.9rem;color:var(--ac)}
+.zt{border-radius:12px;transition:transform .15s,border-color .15s}.zt:hover{transform:translateY(-2px)}.zt.on{box-shadow:0 0 0 3px rgba(7,137,154,.25)}
+button.b{background:linear-gradient(135deg,#0a9db0,#07667e)}
+th{font-family:var(--fh);font-size:.78rem;color:var(--mut)}
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:24px;color:#fff;background:linear-gradient(135deg,#052c42 0%,#07667e 100%);display:grid;grid-template-columns:1.5fr 1fr;gap:18px;align-items:center;box-shadow:0 10px 30px rgba(5,44,66,.25)}
+@media(max-width:700px){.hero{grid-template-columns:1fr}}
+.hero h1{font:700 clamp(1.5rem,3.4vw,2.3rem)/1.2 var(--fh);margin:10px 0}.hero .hi{color:#ffb868}.hero p{margin:0 0 12px;color:#cfe8ef;max-width:52ch}
+.pill{display:inline-block;border:1px solid #ffb868;color:#ffb868;border-radius:20px;padding:2px 12px;font-size:.85rem;font-weight:600}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{background:rgba(255,255,255,.12);border-radius:10px;padding:6px 11px;font-size:.85rem}.chips b{display:block;font:700 1.25rem var(--fh);color:#7fe7f3}
+.orb{max-width:210px;margin:auto;width:100%}.wv{animation:wv 4s linear infinite}@keyframes wv{to{transform:translateX(60px)}}
+@media(prefers-reduced-motion:reduce){.wv{animation:none}}
+</style></head><body>
+<div id="app">
+<aside id="sb" aria-label="Main navigation"><div class="br"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-5px;margin-right:6px"><path d="M12 2C8 8 5 11 5 15a7 7 0 0014 0c0-4-3-7-7-13z" fill="#35cfe0"/><circle cx="12" cy="15" r="3.2" fill="#052c42"/><circle cx="13" cy="14" r="1" fill="#fff"/></svg>JalDrishti<small>जल दृष्टि · Smart Water Intelligence</small></div><nav id="nv"></nav></aside>
+<div id="mn">
+<header>
+<button class="ib" data-a="menu" aria-label="Toggle menu">☰</button>
+<input id="q" type="search" placeholder="Search zones, alerts, complaints" aria-label="Global search">
+<select id="sc" aria-label="Demo scenario"></select>
+<select id="ln" aria-label="Language"><option value="en">English</option><option value="hi">हिन्दी</option></select>
+<button class="ib" data-a="bell" aria-label="Notifications">🔔<span class="bd" id="bc">0</span></button>
+<button class="ib" data-a="prof" id="pf">Staff</button>
+</header>
+<div id="dd" class="dd" hidden></div>
+<div id="dm" role="status"></div>
+<main id="view"></main>
+</div></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const P=[.2,.15,.12,.12,.2,.5,1.1,1.5,1.3,1,.8,.8,.9,.8,.7,.7,.8,1,1.3,1.4,1.1,.8,.5,.3];
+const ZI={Rampur:{b:55,hh:420,x:260,y:60},Khera:{b:48,hh:360,x:260,y:170},Nayagaon:{b:35,hh:260,x:260,y:280},Sundarpur:{b:42,hh:310,x:480,y:60},Bhatoli:{b:30,hh:190,x:480,y:170},Chandpur:{b:38,hh:280,x:480,y:280}};
+const QD={Rampur:{ph:7.4,tu:1.8,cl:.5},Khera:{ph:7.2,tu:2.1,cl:.4},Nayagaon:{ph:7.6,tu:6.2,cl:.3},Sundarpur:{ph:7.1,tu:1.2,cl:.6},Bhatoli:{ph:8.8,tu:2.4,cl:.5},Chandpur:{ph:7.3,tu:1.5,cl:null}};
+const SC={normal:'Normal supply',leak:'Suspected pipeline leak',press:'Low-pressure interruption',unusual:'Unusual consumption',tank:'Tank shortage warning'};
+const T={en:{dash:'Dashboard',map:'Village Map',leak:'Leak Intelligence',comp:'Citizen Complaints',qual:'Water Quality & Tanks',ana:'Analytics & Reports',lab:'Data Lab',set:'Settings'},hi:{dash:'डैशबोर्ड',map:'गाँव का नक्शा',leak:'रिसाव विश्लेषण',comp:'नागरिक शिकायतें',qual:'जल गुणवत्ता व टंकी',ana:'विश्लेषण व रिपोर्ट',lab:'डेटा लैब',set:'सेटिंग्स'}};
+const NV=[['dash','▦'],['map','◎'],['leak','⚑'],['comp','✉'],['qual','≋'],['ana','∿'],['lab','▤'],['set','⚙']];
+const DC={loss:18,night:40,pmin:2,pdrop:.8,hi:2.2,lo:.4,base:7,w:{loss:45,press:25,supply:30}};
+let cfg=JSON.parse(JSON.stringify(DC)),S={page:'dash',zone:'Rampur',scen:'leak',role:'staff',lang:'en',src:'demo',q:'',fil:{zone:'',sev:'',st:'',date:''},busy:0,val:null,txt:''},DATA=[],R={},F=[],AL={},CP=[],cn=1000,TS='';
+const sum=(a,k)=>a.reduce((s,x)=>s+x[k],0),f1=n=>(+n).toFixed(1),med=a=>[...a].sort((x,y)=>x-y)[Math.floor(a.length/2)];
+function gen(sc){let s=7;const r=()=>(s=(s*9301+49297)%233280)/233280,o=[];
+for(const z in ZI)for(let h=0;h<24;h++){let c=ZI[z].b*P[h]*(1+(r()-.5)*.1),f=c*1.07+(r()-.5)*.6,p=2.9-P[h]*.25+(r()-.5)*.15;
+if(sc=='leak'&&z=='Rampur'){f+=14;p-=.7}
+if(sc=='press'&&z=='Khera'&&h>=9&&h<=13){c*=.02;f*=.02;p=.1}
+if(sc=='press'&&z=='Sundarpur'&&h>=17&&h<=21)p-=1.2;
+if(sc=='unusual'&&z=='Bhatoli'&&h>=2&&h<=4){c*=7;f=c*1.07;p-=.3}
+if(sc=='tank'&&z=='Chandpur'&&h>=6){f*=.5;p-=.5}
+o.push({z,h,f:+f.toFixed(1),c:+c.toFixed(1),p:+p.toFixed(2)})}return o}
+function analyse(d){const A={},c=cfg,w=c.w,zs=[...new Set(d.map(r=>r.z))];
+for(const z of zs){const r=d.filter(x=>x.z==z).sort((a,b)=>a.h-b.h);if(r.length<24)continue;
+const hh=ZI[z]?.hh||0,tf=sum(r,'f'),tc=sum(r,'c'),loss=r.reduce((a,x)=>a+Math.max(0,x.f-x.c),0),pct=tf>0?loss/tf*100:0,m=med(r.map(x=>x.c/P[x.h])),ex=h=>m*P[h];
+const nt=r.filter(x=>x.h>=1&&x.h<=4),nf=sum(nt,'f'),night=nf>0?nt.reduce((a,x)=>a+Math.max(0,x.f-x.c),0)/nf*100:0;
+const dead=r.filter(x=>(x.f<.1*ex(x.h)&&ex(x.h)>3)||x.p<.3).map(x=>x.h),dd=h=>dead.includes(h);
+const lowP=r.filter(x=>x.p<c.pmin&&!dd(x.h)).map(x=>x.h);let drop=0,dh=0;
+r.forEach((x,i)=>{if(i&&!dd(x.h)&&!dd(r[i-1].h)&&r[i-1].p-x.p>drop){drop=r[i-1].p-x.p;dh=x.h}});
+const hi=r.filter(x=>!dd(x.h)&&x.c>5&&x.c>c.hi*ex(x.h)).map(x=>x.h),lo=r.filter(x=>!dd(x.h)&&ex(x.h)>5&&x.c<c.lo*ex(x.h)).map(x=>x.h),sh=r.filter(x=>!dd(x.h)&&x.c>5&&x.f<.85*x.c).map(x=>x.h);
+const cap=ZI[z]?m*12*1.0:m*12;let lv=70;const tank=r.map(x=>(lv=Math.max(0,Math.min(100,lv+Math.min(0,x.f-x.c)/cap*100))));
+const fl=[...new Set([...dead,...lowP,...hi,...lo,...sh])],Fs=[];
+const add=(type,score,ev,act,kl)=>{const sev=score>=60?'High':score>=35?'Medium':'Low';Fs.push({id:z+'|'+type,z,type,score,sev,ev,conf:ev.length>=3?'High':ev.length==2?'Medium':'Low',act,kl,hh,prio:Math.round(.5*score+.3*Math.min(100,kl*2)+.2*Math.min(100,hh/4.2))})};
+const sL=pct>=c.loss?Math.min(1,.5+(pct-c.loss)/c.loss):0,sN=night>=c.night?1:0,sP=lowP.length>=3?1:0;
+if(sL||sN){const ev=[];sL&&ev.push(`Loss is ${f1(pct)}% of supply (threshold ${c.loss}%)`);sN&&ev.push(`Night-hours (1–4) loss is ${f1(night)}% (threshold ${c.night}%)`);sP&&ev.push(`Pressure below ${c.pmin} bar for ${lowP.length} h`);drop>=c.pdrop&&ev.push(`Pressure fell ${f1(drop)} bar at ${dh}:00`);
+add('Suspected leakage',Math.round(100*(w.loss*sL+w.supply*sN+w.press*sP)/(w.loss+w.supply+w.press)),ev,'Send a field team to inspect the main line and joints (listen for night leaks). Treat as suspected until verified on site.',loss)}
+if(dead.length>=2){const u=dead.reduce((a,h)=>a+Math.max(0,ex(h)*1.07-r[h].f),0);add('Possible service interruption',Math.round(100*Math.min(1,.5+dead.length/8)),[`Supply near zero between ${dead[0]}:00 and ${dead[dead.length-1]+1}:00 (${dead.length} h)`,`Lowest pressure ${f1(Math.min(...dead.map(h=>r[h].p)))} bar`,`Consumption also near zero, consistent with no supply rather than a meter fault`],'Check pump, valve and power status; inform households and arrange alternative supply if it continues.',u)}
+if(lowP.length>=3&&!sL&&!sN)add('Low pressure',Math.min(90,25+lowP.length*8+(drop>=c.pdrop?15:0)),[`Pressure below ${c.pmin} bar for ${lowP.length} h (min ${f1(Math.min(...lowP.map(h=>r[h].p)))} bar)`,drop>=c.pdrop?`Sudden drop of ${f1(drop)} bar at ${dh}:00`:'Gradual decline'],'Check the pressure sensor calibration first, then valves and pump; compare with the zone’s historical pattern.',0);
+if(hi.length>=2){const rt=hi.reduce((a,h)=>a+r[h].c/ex(h),0)/hi.length;add('Unusual high consumption',Math.min(95,35+hi.length*12+(hi.every(h=>h<=4)?15:0)),[`${hi.length} h at ≥${c.hi}× expected (average ${f1(rt)}×)`,`Peak ${f1(Math.max(...hi.map(h=>r[h].c)))} kL/h vs ~${f1(ex(hi[0]))} expected`,hi.every(h=>h<=4)?'Occurs during night hours':'Occurs in daytime hours'],'Compare with historical usage, then check for a burst, open tap-stand or unauthorised connection.',0)}
+if(lo.length>=3)add('Abnormally low consumption',Math.min(80,30+lo.length*8),[`${lo.length} h below ${c.lo}× expected consumption`],'Check the consumption meter and look for blocked lines or outages.',0);
+if(sh.length>=3){const e=tank[23];add('Supply shortfall',Math.min(98,35+sh.length*5+(e<25?20:0)),[`Supplied below 85% of consumed for ${sh.length} h`,`Estimated tank level ${Math.round(e)}%${e<25?' (below 25% warning)':''}`],'Check source output and the pump; plan tanker supply if tank cover keeps falling.',0)}
+const flh=new Set(fl);
+const cons=Math.max(0,Math.round(100-2.5*Math.max(0,pct-c.base)-1.5*flh.size));
+A[z]={z,r,tf,tc,loss,pct,night,avgP:sum(r,'p')/24,tank,cap,fl:flh,F:Fs,cons,worst:['High','Medium','Low'].find(s=>Fs.some(f=>f.sev==s))||'Normal',pk:sum(r.filter(x=>x.h>=6&&x.h<=9),'c')/4,hh}}
+return A}
+function recompute(){R=analyse(DATA);F=Object.values(R).flatMap(z=>z.F).sort((a,b)=>b.prio-a.prio);TS=new Date().toLocaleString();
+F.forEach(f=>{AL[f.id]=AL[f.id]||{st:'New',tech:'',pr:'',due:'',notes:'',saved:'',hist:[[TS,'Detected by rule engine (suspected, not verified)']],kl:f.kl}});
+if(!R[S.zone])S.zone=Object.keys(R)[0]}
+function load(d,src){S.busy=1;draw();setTimeout(()=>{DATA=d;S.src=src;S.upd=new Date().toLocaleTimeString();recompute();S.busy=0;draw()},250)}
+const sc=a=>a.reduce((s,x)=>s+x,0);
+function chart(ser,fl,W=640,H=250){const L=36,B=22,Tp=8,mx=Math.max(1,...ser.flatMap(s=>s.y))*1.1,X=h=>L+h*(W-L-8)/23,Y=v=>Tp+(H-Tp-B)*(1-v/mx);let g='';
+for(let i=0;i<=4;i++){const v=mx*i/4;g+=`<line x1="${L}" x2="${W-8}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)"/><text x="${L-5}" y="${Y(v)+4}" text-anchor="end" font-size="10" fill="var(--mut)">${v.toFixed(0)}</text>`}
+for(let h=0;h<24;h+=3)g+=`<text x="${X(h)}" y="${H-6}" text-anchor="middle" font-size="10" fill="var(--mut)">${h}:00</text>`;
+(fl||[]).forEach(h=>g+=`<rect x="${X(h)-(W-L-8)/46}" y="${Tp}" width="${(W-L-8)/23}" height="${H-Tp-B}" fill="var(--hi)" opacity=".16"/>`);
+ser.forEach(s=>{g+=`<polyline fill="none" stroke="${s.c}" stroke-width="2.5" points="${s.y.map((v,h)=>X(h)+','+Y(v)).join(' ')}"/>`;s.y.forEach((v,h)=>g+=`<circle cx="${X(h)}" cy="${Y(v)}" r="6" fill="transparent"><title>${s.n} at ${h}:00: ${f1(v)}${s.u||' kL/h'}</title></circle>`)});
+return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${E(ser.map(s=>s.n).join(' vs '))} by hour">${g}</svg>`}
+const bars=(items,mx)=>items.map(([l,v,s])=>`<div class="bar ${s||''}"><span>${E(l)}</span><i style="width:${Math.max(2,v/mx*100)}%"></i><b>${f1(v)}${mx==100?'%':''}</b></div>`).join('');
+const tag=s=>`<span class="tg ${s}">${s}</span>`;
+function zd(z){const Z=R[z];if(!Z)return '<p class="mu">No zone selected.</p>';const fs=Z.F,w=Z.r.reduce((a,x)=>a+x.p,0);
+return `<h3><span class="dt ${Z.worst}"></span>${E(z)} ${tag(Z.worst)}</h3><div class="mu">Supplied ${f1(Z.tf)} kL · Consumed ${f1(Z.tc)} kL · Loss ${f1(Z.loss)} kL (${f1(Z.pct)}%) · Avg pressure ${f1(Z.avgP)} bar · Tank ~${Math.round(Z.tank[23])}% · ${Z.hh||'n/a'} households</div>
+${fs.length?fs.map(f=>`<div class="al ${f.sev}"><b>${f.type}</b>${tag(f.sev)}<span class="mu"> score ${f.score}/100 · confidence ${f.conf}</span><ul>${f.ev.map(e=>`<li>${E(e)}</li>`).join('')}</ul><div><b>Recommended:</b> ${E(f.act)}</div></div>`).join(''):'<p class="ok">✔ No anomalies under current thresholds.</p>'}`}
+const HI={'zones monitored':'निगरानी में ज़ोन','active suspected issues':'संदिग्ध समस्याएँ','zones needing urgent action':'तुरंत कार्रवाई वाले ज़ोन','network water loss':'नेटवर्क जल हानि','conservation score':'जल संरक्षण स्कोर'},hl=t=>S.lang=='hi'?Object.keys(HI).reduce((s,k)=>s.replace(k,HI[k]),t):t;
+function dash(){if(S.busy)return '<div class="bx">Analysing readings…</div>';const zs=Object.keys(R).filter(z=>z.toLowerCase().includes(S.q.toLowerCase()));const A=Object.values(R),tf=sum(A,'tf'),tl=sum(A,'loss');
+const hi=A.filter(z=>z.worst=='High').length,cs=A.length?Math.round(sc(A.map(z=>z.cons))/A.length):0,ef=Math.max(0,Math.min(100,Math.round(100-(tf?tl/tf*100:0)))),rk=sum(A.filter(z=>z.worst=='High'||z.worst=='Medium'),'hh');
+return `<section class="hero"><div><span class="pill">हर घर जल · Har Ghar Jal</span><h1>हर नल तक पूरा पानी,<br><span class="hi">हर बूँद का हिसाब</span></h1><p>${S.lang=='hi'?'JalDrishti हर घंटे के आँकड़ों से रिसाव, कम दबाव और सप्लाई रुकने के संकेत पहले ही पकड़ता है, ताकि अंतिम घर तक पानी पहुँचे।':'JalDrishti reads hourly supply, consumption and pressure data to catch leakage, low pressure and supply stoppages early, so water reaches the last household.'}</p><div class="chips"><span><b>${ef}%</b>${S.lang=='hi'?'जल दक्षता':'water efficiency'}</span><span><b>${rk.toLocaleString()}</b>${S.lang=='hi'?'परिवार प्रभावित हो सकते हैं':'households possibly affected'}</span><span><b>${A.filter(z=>z.worst=='Normal').length}/${A.length}</b>${S.lang=='hi'?'ज़ोन सामान्य':'zones normal'}</span></div></div><div class="orb"><svg viewBox="0 0 120 120" role="img" aria-label="Water efficiency ${ef} percent"><defs><clipPath id="oc"><circle cx="60" cy="60" r="56"/></clipPath></defs><circle cx="60" cy="60" r="58" fill="#021a29" stroke="#35cfe0" stroke-width="2"/><g clip-path="url(#oc)"><g style="transform:translateY(${112-ef}px)"><path class="wv" d="M-120 8q15-8 30 0t30 0 30 0 30 0 30 0 30 0 30 0 30 0V130H-120z" fill="#35cfe0" opacity=".88"/></g></g><text x="60" y="68" text-anchor="middle" fill="#fff" stroke="#021a29" stroke-width="3" paint-order="stroke" font-size="24" font-weight="700">${ef}%</text></svg></div></section><section class="g">${[[A.length,'zones monitored'],[F.length,'active suspected issues'],[hi,'zones needing urgent action'],[f1(tf?tl/tf*100:0)+'%','network water loss ('+f1(tl)+' kL ≈ '+Math.round(tl*1000).toLocaleString()+' L)'],[cs+'/100','conservation score']].map(k=>`<div class="bx k"><b>${k[0]}</b><span>${hl(k[1])}</span></div>`).join('')}</section>
+<section class="bx"><h3>Village zones <span class="mu">(scenario: ${SC[S.scen]})</span></h3><div class="g">${zs.map(z=>`<button class="zt ${z==S.zone?'on':''}" data-a="zone" data-v="${E(z)}" aria-pressed="${z==S.zone}"><span class="dt ${R[z].worst}"></span><b>${E(z)}</b><br><span class="mu">${R[z].F.length?R[z].F.length+' issue(s)':'Normal'} · loss ${f1(R[z].pct)}%</span></button>`).join('')||'<p class="mu">No zone matches your search.</p>'}</div></section>
+<section class="g2"><div class="bx"><h3>${E(S.zone)}: supplied vs consumed (kL per hour)</h3>${R[S.zone]?chart([{n:'Supplied',c:'var(--ac)',y:R[S.zone].r.map(x=>x.f)},{n:'Consumed',c:'var(--md)',y:R[S.zone].r.map(x=>x.c)}],R[S.zone].fl):''}<div class="lg"><span>━ Supplied</span><span>━ Consumed</span><span>▮ Flagged hours</span></div></div><div class="bx">${zd(S.zone)}</div></section>
+<section class="bx"><h3>Zone summary</h3>${ztable(A)}</section>`}
+const ztable=A=>`<div class="tw"><table><tr><th>Zone</th><th>Supplied kL</th><th>Consumed kL</th><th>Loss kL</th><th>Loss %</th><th>Avg bar</th><th>Status</th></tr>${A.map(z=>`<tr><td>${E(z.z)}</td><td>${f1(z.tf)}</td><td>${f1(z.tc)}</td><td>${f1(z.loss)}</td><td>${f1(z.pct)}</td><td>${f1(z.avgP)}</td><td><span class="dt ${z.worst}"></span>${z.F.map(f=>f.type).join(', ')||'Normal'}</td></tr>`).join('')}</table></div>`;
+function map(){if(S.busy)return '<div class="bx">Analysing readings…</div>';const zs=Object.keys(ZI).filter(z=>R[z]),col={High:'var(--hi)',Medium:'var(--md)',Low:'var(--lw)',Normal:'var(--ok)'};
+let g=`<path d="M92 170H150M150 60V280M150 60H190M150 170H190M150 280H190M330 60H410M330 170H410M330 280H410" stroke="var(--ac)" stroke-width="5" fill="none"/><rect x="20" y="145" width="72" height="50" rx="8" fill="var(--nv)"/><text x="56" y="167" text-anchor="middle" fill="#fff" font-size="11">Source /</text><text x="56" y="182" text-anchor="middle" fill="#fff" font-size="11">treatment</text>`;
+zs.forEach(z=>{const i=ZI[z],Z=R[z],sl=z==S.zone;g+=`<g class="mz" tabindex="0" role="button" data-a="zone" data-v="${z}" aria-label="${z}, status ${Z.worst}"><rect x="${i.x-70}" y="${i.y-38}" width="140" height="76" rx="12" fill="${col[Z.worst]}" fill-opacity=".22" stroke="${col[Z.worst]}" stroke-width="${sl?5:2}"/><text x="${i.x}" y="${i.y-10}" text-anchor="middle" font-weight="700" fill="var(--ink)">${z}</text><text x="${i.x}" y="${i.y+8}" text-anchor="middle" font-size="11" fill="var(--ink)">${Z.worst=='Normal'?'Normal':Z.F[0].type}</text><text x="${i.x}" y="${i.y+25}" text-anchor="middle" font-size="11" fill="var(--mut)">Tank ~${Math.round(Z.tank[23])}% · ${f1(Z.avgP)} bar</text><circle cx="${i.x-70}" cy="${i.y}" r="6" fill="var(--sf)" stroke="var(--ink)" stroke-width="2"><title>Pressure sensor (illustrative position)</title></circle></g>`});
+return `<h2>${T[S.lang].map}</h2><section class="g2"><div class="bx"><svg viewBox="0 0 640 330" role="img" aria-label="Schematic village network map">${g}</svg><p class="mu">Illustrative schematic: not to scale, not geographic, and sensor positions are not surveyed. ○ marks a pressure sensor. Select a zone for its details.</p></div><div class="bx">${zd(S.zone)}</div></section>`}
+function fil(){const f=S.fil,q=S.q.toLowerCase();return F.filter(x=>(!f.zone||x.z==f.zone)&&(!f.sev||x.sev==f.sev)&&(!f.st||AL[x.id].st==f.st)&&(!f.date||f.date==new Date().toISOString().slice(0,10))&&(!q||(x.z+x.type).toLowerCase().includes(q)))}
+const ST=['New','Acknowledged','Assigned','In progress','Repaired'];
+function leak(){if(S.busy)return '<div class="bx">Analysing readings…</div>';const L=fil(),st=S.role=='staff';
+const sel=(k,o)=>`<label>${k}<select class="in" data-f="${k}"><option value="">All</option>${o.map(x=>`<option ${S.fil[k]==x?'selected':''}>${x}</option>`).join('')}</select></label>`;
+return `<h2>${T[S.lang].leak}</h2><p class="mu">A rule engine scores each issue from supply, consumption and pressure readings. Findings are <b>suspected</b> until a technician verifies them on site. Detected ${TS}.</p>
+<div class="bx fr">${sel('zone',Object.keys(R))}${sel('sev',['High','Medium','Low'])}${sel('st',ST)}<label>date<input class="in" type="date" data-f="date" value="${S.fil.date}"></label></div>
+${L.length?L.map(f=>{const a=AL[f.id],i=F.indexOf(f);return `<div class="bx al ${f.sev}" data-id="${E(f.id)}"><b>${f.type}</b> · ${E(f.z)} ${tag(f.sev)}<span class="tg n">${a.st}</span><div class="mu">Score ${f.score}/100 · confidence ${f.conf}${f.conf=='Low'?' (single indicator, high uncertainty)':''} · repair priority index ${f.prio} · est. water impact ${f1(f.kl)} kL · ${f.hh||'n/a'} households · ${TS}</div><div><b>Supporting readings:</b></div><ul>${f.ev.map(e=>`<li>${E(e)}</li>`).join('')}</ul><div><b>Recommended action:</b> ${E(f.act)}</div>
+${st?`<div class="fr"><label>status<select class="in" name="st">${ST.map(s=>`<option ${a.st==s?'selected':''}>${s}</option>`).join('')}</select></label><label>technician<input class="in" name="tech" value="${E(a.tech)}"></label><label>priority<select class="in" name="pr">${['','Urgent','High','Normal'].map(s=>`<option ${a.pr==s?'selected':''}>${s}</option>`).join('')}</select></label><label>due<input class="in" type="date" name="due" value="${a.due}"></label><label>water saved after repair (kL, estimate)<input class="in" type="number" min="0" name="saved" value="${a.saved}"></label></div><label class="mu">inspection notes<textarea class="in" name="notes" style="min-height:50px">${E(a.notes)}</textarea></label><button class="b" data-a="ack" data-v="${i}">Acknowledge</button><button class="b g2b" data-a="save" data-v="${i}">Save update</button>`:'<p class="mu">Read-only in citizen view.</p>'}
+${a.st=='Repaired'&&a.saved!==''?`<p class="ok">Before/after: est. impact ${f1(f.kl)} kL → ${f1(Math.max(0,f.kl-a.saved))} kL after repair (technician-reported saving ${a.saved} kL, an estimate).</p>`:''}
+<div>${a.hist.map(h=>`<div class="tl">${E(h[0])}: ${E(h[1])}</div>`).join('')}</div></div>`}).join(''):'<div class="bx"><p class="ok">No issues match these filters.</p></div>'}`}
+const CS=['Submitted','Under Review','Assigned','In Progress','Resolved'],CE={Submitted:'Staff review, estimated within 1 working day',['Under Review']:'Assignment to a technician, estimated 1–2 days',Assigned:'Technician visit, estimated 1–3 days',['In Progress']:'Repair or inspection under way, timing depends on the fault',Resolved:'Closed. Report again if the problem returns'};
+function newC(t,z,d,img,demo){const id='JM-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+(++cn);CP.unshift({id,t,z,d,img,s:0,tech:'',demo,h:[[new Date().toLocaleString(),'Submitted']]})}
+function comp(){const q=S.q.toLowerCase(),L=CP.filter(c=>!q||(c.id+c.z+c.t+c.d).toLowerCase().includes(q));
+return `<h2>${T[S.lang].comp}: JalMitra</h2><div class="g2"><div class="bx"><h3>Report a problem</h3><div class="fr"><label>type<select class="in" id="ct">${['Leakage','No water supply','Low pressure','Water-quality concern'].map(x=>`<option>${x}</option>`).join('')}</select></label><label>village / zone<select class="in" id="cz">${Object.keys(ZI).map(x=>`<option>${x}</option>`).join('')}</select></label></div><label class="mu">description<textarea class="in" id="cd" placeholder="What did you notice, and where?"></textarea></label><label class="mu">photo (optional, under 2 MB)<br><input type="file" id="ci" accept="image/*"></label><br><button class="b" data-a="csub">Submit complaint</button><span class="er" id="ce"></span></div>
+<div class="bx"><h3>Track complaints</h3>${L.length?L.map((c,i)=>`<div class="al Low"><b>${c.id}</b> ${c.demo?'<span class="tg n">demo</span>':''}<br>${E(c.t)} · ${E(c.z)} · <b>${CS[c.s]}</b><br>${E(c.d)}${c.img?`<br><img src="${c.img}" alt="Complaint photo" style="max-width:120px;border-radius:6px">`:''}<div class="mu">Next step (estimate, not a guaranteed deadline): ${CE[CS[c.s]]}${c.tech?' · technician: '+E(c.tech):''}</div>${c.h.map(h=>`<div class="tl">${E(h[0])}: ${E(h[1])}</div>`).join('')}${S.role=='staff'&&c.s<4?`<div class="fr"><label>technician<input class="in" data-ct="${i}" value="${E(c.tech)}"></label><button class="b g2b" data-a="cadv" data-v="${c.id}">Move to ${CS[c.s+1]}</button></div>`:''}</div>`).join(''):'<p class="mu">No complaints yet. Submit one to see tracking.</p>'}</div></div>`}
+function qual(){if(S.busy)return '<div class="bx">Analysing readings…</div>';const zs=Object.keys(R);
+const row=z=>{const q=(S.src=='demo'&&QD[z])||{ph:null,tu:null,cl:null},w=[];if(q.ph==null)w.push('No quality sensors');else{(q.ph<6.5||q.ph>8.5)&&w.push('pH outside 6.5–8.5');q.tu>5&&w.push('Turbidity above 5 NTU');q.cl==null?w.push('Chlorine sensor unavailable'):(q.cl<.2||q.cl>1)&&w.push('Chlorine outside 0.2–1.0 mg/L')}
+const t=R[z].tank[23],dead=R[z].r[23].f<1;if(t<25)w.push('Tank low');return `<tr><td>${E(z)}</td><td>${q.ph??'n/a'}</td><td>${q.tu??'n/a'}</td><td>${q.cl==null?'Unavailable':q.cl}</td><td>${Math.round(t)}%</td><td>${dead?'No inflow detected':'Receiving supply'}</td><td>${R[z].pk>0?f1(R[z].cap*t/100/R[z].pk)+' h':'n/a'}</td><td>${w.length?w.map(x=>`<span class="er">⚠ ${x}</span>`).join('<br>'):'<span class="ok">Within thresholds</span>'}</td></tr>`};
+return `<h2>${T[S.lang].qual}</h2><div class="bx">Tank level is estimated from supply deficits in the loaded data. Quality readings are not a drinking-water safety certificate; only lab tests can confirm that. Quality sensors are shown only for the built-in sample, because the CSV has no quality columns.</div><div class="bx tw"><table><tr><th>Zone</th><th>pH</th><th>Turbidity NTU</th><th>Chlorine mg/L</th><th>Tank (est.)</th><th>Pump / inflow</th><th>Storage cover*</th><th>Warnings</th></tr>${zs.map(row).join('')}</table><p class="mu">*Estimate: tank volume ÷ average morning-peak (6–9 h) demand.</p></div><div class="bx"><h3>${E(S.zone)}: estimated tank level (%)</h3>${R[S.zone]?chart([{n:'Tank level',c:'var(--ac)',y:R[S.zone].tank,u:'%'}],[]):''}<div class="fr">${zs.map(z=>`<button class="b g2b" data-a="zone" data-v="${E(z)}">${E(z)}</button>`).join('')}</div></div>`}
+function ana(){if(S.busy)return '<div class="bx">Analysing readings…</div>';const A=Object.values(R),z=R[S.zone],tl=sum(A,'loss'),repaired=F.filter(f=>AL[f.id].st=='Repaired'&&AL[f.id].saved!=='');
+const all=Array.from({length:24},(_,h)=>sum(A.map(x=>x.r[h]).map(x=>({v:x.f})),'v')),allc=Array.from({length:24},(_,h)=>sum(A.map(x=>x.r[h]).map(x=>({v:x.c})),'v'));
+return `<h2>${T[S.lang].ana}</h2><div class="bx"><h3>All zones: hourly supplied vs consumed (kL/h)</h3>${chart([{n:'Supplied',c:'var(--ac)',y:all},{n:'Consumed',c:'var(--md)',y:allc}],[])}</div>
+<div class="g2"><div class="bx"><h3>Loss by zone (% of supplied)</h3>${bars(A.map(x=>[x.z,x.pct,x.pct>=cfg.loss?'High':'Normal']),100)}<p class="mu">Total estimated loss ${f1(tl)} kL = ${Math.round(tl*1000).toLocaleString()} litres in the dataset’s 24 h.</p></div>
+<div class="bx"><h3>Conservation score</h3><p class="mu">Score = 100 − 2.5 × (loss % − ${cfg.base}% baseline, if positive) − 1.5 × flagged hours, limited to 0–100.</p>${bars(A.map(x=>[x.z,x.cons,x.cons<60?'High':x.cons<80?'Medium':'Normal']),100).replace(/%</g,'<')}</div></div>
+<div class="bx"><h3>Daily totals and anomaly timeline</h3><div class="tw"><table><tr><th>Zone</th><th>Daily supplied kL</th><th>Daily consumed kL</th><th>Flagged hours</th><th>Storage cover (est.)</th></tr>${A.map(x=>`<tr><td>${E(x.z)}</td><td>${f1(x.tf)}</td><td>${f1(x.tc)}</td><td>${[...x.fl].sort((a,b)=>a-b).map(h=>h+':00').join(', ')||'none'}</td><td>${x.pk>0?f1(x.cap*x.tank[23]/100/x.pk)+' h':'n/a'}</td></tr>`).join('')}</table></div><p class="mu">Only one day of history is loaded, so multi-day trends and forecasts cannot be shown; storage cover is a simple estimate, not a forecast model.</p></div>
+<div class="bx"><h3>Before / after repairs</h3>${repaired.length?repaired.map(f=>`<p>${E(f.z)}: ${f1(f.kl)} kL est. impact → ${f1(Math.max(0,f.kl-AL[f.id].saved))} kL after repair (saving ${AL[f.id].saved} kL, technician estimate)</p>`).join(''):'<p class="mu">Mark an alert Repaired with an estimated saving on the Leak Intelligence page to see it here.</p>'}</div>
+<div class="bx noprint"><button class="b" data-a="exp">Export data CSV</button><button class="b g2b" data-a="prt">Print report</button><span class="mu" id="am"></span></div>`}
+function lab(){const v=S.val;return `<h2>${T[S.lang].lab}</h2><div class="bx"><p class="mu">Paste CSV with columns <code>zone,hour,supplied,consumed,pressure</code> (hour 0–23, all 24 hours per zone, values in kL/h and bar). A header row is optional.</p><textarea class="in" id="csv" aria-label="CSV data" placeholder="Rampur,0,12.4,11.5,2.9">${E(S.txt)}</textarea><button class="b" data-a="run">Analyse pasted data</button><button class="b g2b" data-a="reset">Reset to demo data</button><button class="b g2b" data-a="exp">Export current data</button><button class="b g2b" data-a="prm">Copy findings as AI prompt</button><p id="am" class="mu" role="status"></p></div>
+<div class="bx"><h3>Add a latest reading</h3><p class="mu">Update one hour of your own loaded data. A web page cannot reach sensors by itself; automatic live feeds need a backend (see Settings).</p><div class="fr"><label>zone<input class="in" id="lz" value="${E(S.zone)}"></label><label>hour (0–23)<input class="in" id="lh" type="number" min="0" max="23" value="${new Date().getHours()}"></label><label>supplied kL/h<input class="in" id="lf" type="number" step="any" min="0"></label><label>consumed kL/h<input class="in" id="lc" type="number" step="any" min="0"></label><label>pressure bar<input class="in" id="lp" type="number" step="any" min="0"></label><button class="b" data-a="live">Update reading</button></div><p class="er" id="le"></p></div>
+${v?`<div class="bx"><h3>Validation report</h3><p class="${v.err.length?'er':'ok'}">${v.ok} valid rows · ${v.err.length} problem(s)</p>${v.err.slice(0,25).map(e=>`<div class="er">• ${E(e)}</div>`).join('')}${v.err.length>25?`<div class="mu">…and ${v.err.length-25} more</div>`:''}</div>`:''}`}
+function set(){const n=(k,l,w)=>`<label>${l}<input class="in" type="number" step="any" data-c="${k}" ${w?'data-w="1"':''} value="${w?cfg.w[k]:cfg[k]}"></label>`;
+return `<h2>${T[S.lang].set}</h2><div class="bx"><h3>Detection thresholds and weights</h3><div class="fr">${n('loss','Loss % alert')}${n('night','Night loss % alert')}${n('pmin','Low pressure (bar)')}${n('pdrop','Sudden drop (bar)')}${n('hi','High use (× expected)')}${n('lo','Low use (× expected)')}${n('base','Baseline loss %')}</div><div class="fr">${n('loss','Weight: loss',1)}${n('press','Weight: pressure',1)}${n('supply','Weight: night supply',1)}</div><button class="b g2b" data-a="cfgr">Reset defaults</button></div>
+<div class="bx"><h3>What is real and what is not</h3><p><b>Implemented (in this page):</b> rule engine, CSV validation, scenarios, map schematic, complaints and alert workflows, analytics, local recommendations.</p><p><b>Demo only:</b> all sensor, quality, tank and household figures; staff/citizen roles (no login); data resets on reload.</p><p><b>Future integrations:</b> secure REST API, PostgreSQL storage, MQTT/IoT sensor ingestion, authentication with role-based access, optional AI service called from the backend (no keys in the browser). No trained AI model is used here.</p></div>`}
+const V={dash,map,leak,comp,qual,ana,lab,set};
+function draw(){$('#view').innerHTML=V[S.page]();$('#nv').innerHTML=NV.map(([k,i])=>`<button class="n ${k==S.page?'on':''}" data-a="go" data-v="${k}" ${k==S.page?'aria-current="page"':''}><span aria-hidden="true">${i}</span><span class="lb">${T[S.lang][k]}</span></button>`).join('');
+const nw=F.filter(f=>AL[f.id].st=='New').length;$('#bc').textContent=nw;$('#pf').textContent=S.role=='staff'?'Staff ▾':'Citizen ▾';
+const d=$('#dm');d.textContent=S.src=='demo'?'Data source: built-in sample (no sensors connected yet). Add your real readings in Data Lab.':'Data source: your readings · last updated '+S.upd;d.className=S.src=='demo'?'':'c'}
+function csvParse(t){const err=[],rows=[],seen={};t.split(/\r?\n/).forEach((l,i)=>{if(!l.trim())return;const a=l.split(',').map(x=>x.trim());if(i==0&&/^zone$/i.test(a[0]))return;const n=i+1;
+if(a.length!=5)return err.push(`Line ${n}: expected 5 columns, found ${a.length}`);if(a.some(x=>x===''))return err.push(`Line ${n}: empty value`);
+const h=+a[1],v=a.slice(2).map(Number);if(!Number.isInteger(h)||h<0||h>23)return err.push(`Line ${n}: hour "${a[1]}" must be a whole number 0–23`);
+if(v.some(x=>!isFinite(x)||x<0))return err.push(`Line ${n}: supplied, consumed and pressure must be numbers ≥ 0`);
+const k=a[0]+'|'+h;if(seen[k])return err.push(`Line ${n}: duplicate row for ${a[0]} hour ${h} (first on line ${seen[k]})`);seen[k]=n;rows.push({z:a[0],h,f:v[0],c:v[1],p:v[2]})});
+const ok=rows.length,by={};rows.forEach(r=>(by[r.z]=by[r.z]||[]).push(r));const good=[];
+for(const z in by){if(by[z].length==24)good.push(...by[z]);else{const m=[...Array(24).keys()].filter(h=>!by[z].some(r=>r.h==h));err.push(`Zone ${z} excluded: missing hours ${m.join(', ')}`)}}
+return{rows:good,err,ok}}
+const prompt=()=>"You are a water-network analyst for a Jal Jeevan Mission village scheme. Review the findings and hourly data (zone,hour,supplied kL,consumed kL,pressure bar). Treat findings as suspected, not confirmed. Check the evidence, suggest what else to verify, and rank repairs.\n\nFindings:\n"+(F.map(f=>`${f.z}: ${f.type} (${f.sev}, score ${f.score}) - ${f.ev.join('; ')}`).join('\n')||'None')+"\n\nData:\n"+DATA.map(r=>[r.z,r.h,r.f,r.c,r.p].join(',')).join('\n');
+const out=(t,m)=>{const el=$('#am');(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>el&&(el.textContent=m+' copied to clipboard.'),()=>{S.txt=t;S.page='lab';draw();$('#am').textContent=m+' placed in the box above (clipboard blocked here).'})};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t){if(!e.target.closest('#dd,[data-a=bell],[data-a=prof]'))$('#dd').hidden=true;return}
+const a=t.dataset.a,v=t.dataset.v;
+if(a=='go'){S.page=v;$('#sb').classList.remove('open');draw()}
+else if(a=='menu'){innerWidth<860?$('#sb').classList.toggle('open'):$('#sb').classList.toggle('sm')}
+else if(a=='zone'){S.zone=v;draw()}
+else if(a=='bell'){const d=$('#dd'),L=F.filter(f=>AL[f.id].st=='New').slice(0,6);d.innerHTML='<b>Notifications</b>'+(L.length?L.map(f=>`<div class="al ${f.sev}"><b>${f.type}</b> · ${E(f.z)}<br><span class="mu">${f.sev} · suspected</span></div>`).join('')+'<button class="b" data-a="go" data-v="leak">Open alerts</button>':'<p class="mu">No new alerts.</p>');d.hidden=!d.hidden}
+else if(a=='prof'){const d=$('#dd');d.innerHTML=`<b>Profile (demo roles)</b><p class="mu">There is no real login. Switch role to see staff or citizen views.</p><button class="b" data-a="role" data-v="staff">Staff</button><button class="b g2b" data-a="role" data-v="citizen">Citizen</button>`;d.hidden=!d.hidden}
+else if(a=='role'){S.role=v;$('#dd').hidden=true;draw()}
+else if(a=='ack'||a=='save'){const f=F[v],al=AL[f.id],c=t.closest('[data-id]'),g=n=>c.querySelector(`[name=${n}]`).value,old=al.st;
+if(a=='ack'&&al.st=='New')al.st='Acknowledged';else if(a=='save'){const s=g('saved');if(s!==''&&(isNaN(s)||+s<0)){alert('Water saved must be a number of 0 or more.');return}Object.assign(al,{st:g('st'),tech:g('tech'),pr:g('pr'),due:g('due'),notes:g('notes'),saved:s})}
+if(al.st=='Assigned'&&!al.tech){alert('Enter a technician name for an assigned alert.');al.st=old;return}
+al.hist.push([new Date().toLocaleString(),`${old==al.st?'Updated':old+' → '+al.st}${al.tech?' · technician '+al.tech:''}${al.pr?' · priority '+al.pr:''}${al.due?' · due '+al.due:''}${al.notes?' · notes: '+al.notes:''}`]);draw()}
+else if(a=='csub'){const d=$('#cd').value.trim(),z=$('#cz').value,ty=$('#ct').value,fi=$('#ci').files[0];if(d.length<5){$('#ce').textContent=' Please describe the problem (at least 5 characters).';return}
+const fin=im=>{newC(ty,z,d,im,0);draw()};if(fi){if(!fi.type.startsWith('image/')||fi.size>2e6){$('#ce').textContent=' Photo must be an image under 2 MB.';return}const r=new FileReader();r.onload=()=>fin(r.result);r.readAsDataURL(fi)}else fin(null)}
+else if(a=='cadv'){const c=CP.find(x=>x.id==v),tc=document.querySelector(`[data-ct="${CP.indexOf(c)}"]`).value.trim();if(c.s==1&&!tc){alert('Enter a technician name before assigning.');return}c.tech=tc||c.tech;c.s++;c.h.push([new Date().toLocaleString(),CS[c.s]+(c.tech?' ('+c.tech+')':'')]);draw()}
+else if(a=='run'){const r=csvParse($('#csv').value);S.txt=$('#csv').value;S.val=r;if(!r.rows.length){r.err.push('No complete zone found, so the current data was kept.');draw();return}load(r.rows,'csv');S.page='lab'}
+else if(a=='live'){const z=$('#lz').value.trim(),h=+$('#lh').value,v=['#lf','#lc','#lp'].map(s=>$(s).value),e=$('#le');if(S.src=='demo'){e.textContent='Load your own 24-hour CSV first (paste it above and press Analyse), then update single readings.';return}const r=DATA.find(x=>x.z==z&&x.h==h);if(!r){e.textContent='Zone "'+z+'" hour '+h+' is not in the loaded data.';return}if(!Number.isInteger(h)||h<0||h>23||v.some(x=>x===''||!isFinite(+x)||+x<0)){e.textContent='Enter an hour from 0 to 23 and numbers of 0 or more in all three readings.';return}r.f=+v[0];r.c=+v[1];r.p=+v[2];load(DATA,'csv')}
+else if(a=='reset'){S.val=null;S.txt='';load(gen(S.scen),'demo')}
+else if(a=='exp')out('zone,hour,supplied,consumed,pressure\n'+DATA.map(r=>[r.z,r.h,r.f,r.c,r.p].join(',')).join('\n'),'CSV');
+else if(a=='prm')out(prompt(),'AI prompt');
+else if(a=='prt'){try{print()}catch(x){$('#am').textContent=' Printing is blocked in this view; open the page link in a browser tab first.'}}
+else if(a=='cfgr'){cfg=JSON.parse(JSON.stringify(DC));recompute();draw()}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.f){S.fil[t.dataset.f]=t.value;draw()}
+if(t.dataset.c){const v=parseFloat(t.value);if(!isFinite(v)||v<0){t.value=t.dataset.w?cfg.w[t.dataset.c]:cfg[t.dataset.c];return}t.dataset.w?cfg.w[t.dataset.c]=v:cfg[t.dataset.c]=v;recompute();draw()}});
+$('#q').addEventListener('input',e=>{S.q=e.target.value;if(!['dash','leak','comp'].includes(S.page))S.page='dash';draw();const q=$('#q');q.focus()});
+$('#sc').innerHTML=Object.entries(SC).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');$('#sc').value=S.scen;
+$('#sc').onchange=e=>{S.scen=e.target.value;if(S.src=='csv'){S.src='demo'}load(gen(S.scen),'demo')};
+$('#ln').onchange=e=>{S.lang=e.target.value;draw()};
+newC('Leakage','Rampur','Water flowing on the road near the hand pump.',null,1);newC('Low pressure','Sundarpur','Taps give very little water in the evening.',null,1);CP[0].s=2;CP[0].tech='Demo technician';CP[0].h.push([new Date().toLocaleString(),'Assigned (Demo technician)']);
+DATA=gen(S.scen);recompute();draw();
+</script>
+<script>
+(function(){
+const STATES=['Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal','Andaman and Nicobar Islands','Chandigarh','Dadra and Nagar Haveli and Daman and Diu','Delhi','Jammu and Kashmir','Ladakh','Lakshadweep','Puducherry'];
+const H={Punjab:{Ludhiana:['Doraha','Khanna','Samrala','Jagraon'],Amritsar:[],Patiala:[],Jalandhar:[]},Maharashtra:{Pune:['Haveli','Mulshi','Maval','Baramati','Junnar','Khed'],Nagpur:[],Nashik:[]},'Uttar Pradesh':{'Gautam Buddh Nagar':['Dadri','Bisrakh','Jewar'],Lucknow:[],Varanasi:[]},Rajasthan:{Jaipur:[],Jodhpur:[]},Gujarat:{Ahmedabad:[],Surat:[]}};
+const LOC={Rampur:{s:'Punjab',d:'Ludhiana',b:'Doraha'},Khera:{s:'Punjab',d:'Ludhiana',b:'Khanna'},Nayagaon:{s:'Maharashtra',d:'Pune',b:'Mulshi'},Sundarpur:{s:'Maharashtra',d:'Pune',b:'Haveli'},Bhatoli:{s:'Uttar Pradesh',d:'Gautam Buddh Nagar',b:'Dadri'},Chandpur:{s:'Uttar Pradesh',d:'Gautam Buddh Nagar',b:'Jewar'}};
+const SL='जल दृष्टि — हर बूँद पर नज़र, हर घर तक असर';
+const K='role,state,district,block,name,signin,demo,r_central,r_state,r_dm,r_block,r_citizen,ro,pub,pub_d,allstates,alld,allb'.split(',');
+const LG={
+en:['Sign in as','State / UT','District','Block / tehsil','Your name','Sign in','Demo sign-in: no real authentication or password. A production system needs secure government SSO/OTP login on a backend.','Central Government','State Government','District Magistrate','Block Officer','Citizen','Read-only: outside your jurisdiction.','Public Transparency','Everything here is public and read-only for everyone. Every change is logged with who made it and when.','All states / UTs','All districts','All blocks'],
+hi:['इस रूप में साइन इन करें','राज्य / केंद्रशासित प्रदेश','ज़िला','ब्लॉक / तहसील','आपका नाम','साइन इन','डेमो साइन-इन: असली प्रमाणीकरण या पासवर्ड नहीं है। असली सिस्टम में बैकएंड पर सुरक्षित सरकारी SSO/OTP लॉगिन चाहिए।','केंद्र सरकार','राज्य सरकार','ज़िलाधिकारी (DM)','ब्लॉक अधिकारी','नागरिक','केवल देखने के लिए: आपके क्षेत्र से बाहर।','सार्वजनिक पारदर्शिता','यहाँ सब कुछ सभी के लिए सार्वजनिक और केवल-पढ़ने योग्य है। हर बदलाव किसने और कब किया, दर्ज होता है।','सभी राज्य / केंद्रशासित प्रदेश','सभी ज़िले','सभी ब्लॉक'],
+pa:['ਇਸ ਤੌਰ ਤੇ ਸਾਈਨ ਇਨ ਕਰੋ','ਰਾਜ / ਕੇਂਦਰ ਸ਼ਾਸਿਤ ਪ੍ਰਦੇਸ਼','ਜ਼ਿਲ੍ਹਾ','ਬਲਾਕ / ਤਹਿਸੀਲ','ਤੁਹਾਡਾ ਨਾਮ','ਸਾਈਨ ਇਨ','ਡੈਮੋ ਸਾਈਨ-ਇਨ: ਅਸਲੀ ਪ੍ਰਮਾਣਿਕਤਾ ਜਾਂ ਪਾਸਵਰਡ ਨਹੀਂ ਹੈ। ਅਸਲ ਸਿਸਟਮ ਲਈ ਬੈਕਐਂਡ ਉੱਤੇ ਸੁਰੱਖਿਅਤ ਸਰਕਾਰੀ SSO/OTP ਲਾਗਇਨ ਚਾਹੀਦਾ ਹੈ।','ਕੇਂਦਰ ਸਰਕਾਰ','ਰਾਜ ਸਰਕਾਰ','ਜ਼ਿਲ੍ਹਾ ਮੈਜਿਸਟਰੇਟ','ਬਲਾਕ ਅਧਿਕਾਰੀ','ਨਾਗਰਿਕ','ਸਿਰਫ਼ ਵੇਖਣ ਲਈ: ਤੁਹਾਡੇ ਖੇਤਰ ਤੋਂ ਬਾਹਰ।','ਜਨਤਕ ਪਾਰਦਰਸ਼ਤਾ','ਇੱਥੇ ਸਭ ਕੁਝ ਹਰ ਕਿਸੇ ਲਈ ਜਨਤਕ ਅਤੇ ਸਿਰਫ਼ ਪੜ੍ਹਨ ਲਈ ਹੈ। ਹਰ ਤਬਦੀਲੀ ਕਿਸ ਨੇ ਅਤੇ ਕਦੋਂ ਕੀਤੀ, ਦਰਜ ਹੁੰਦਾ ਹੈ।','ਸਾਰੇ ਰਾਜ / ਕੇਂਦਰ ਸ਼ਾਸਿਤ ਪ੍ਰਦੇਸ਼','ਸਾਰੇ ਜ਼ਿਲ੍ਹੇ','ਸਾਰੇ ਬਲਾਕ'],
+ur:['اس حیثیت سے سائن ان کریں','ریاست / مرکز کے زیرِ انتظام علاقہ','ضلع','بلاک / تحصیل','آپ کا نام','سائن ان','ڈیمو سائن ان: اصل تصدیق یا پاس ورڈ نہیں ہے۔ حقیقی نظام کے لیے بیک اینڈ پر محفوظ سرکاری SSO/OTP لاگ ان درکار ہے۔','مرکزی حکومت','ریاستی حکومت','ضلع مجسٹریٹ','بلاک افسر','شہری','صرف دیکھنے کے لیے: آپ کے دائرۂ اختیار سے باہر۔','عوامی شفافیت','یہاں سب کچھ ہر کسی کے لیے عوامی اور صرف پڑھنے کے لیے ہے۔ ہر تبدیلی کس نے اور کب کی، درج ہوتی ہے۔','تمام ریاستیں / مرکز کے زیرِ انتظام علاقے','تمام اضلاع','تمام بلاک']};
+const L=k=>{const i=K.indexOf(k);return i<0?k:((LG[S.lang]||LG.en)[i]||LG.en[i])};
+T.en.pub='Public Transparency';T.hi.pub='सार्वजनिक पारदर्शिता';
+T.pa={dash:'ਡੈਸ਼ਬੋਰਡ',map:'ਪਿੰਡ ਦਾ ਨਕਸ਼ਾ',leak:'ਲੀਕੇਜ ਵਿਸ਼ਲੇਸ਼ਣ',comp:'ਨਾਗਰਿਕ ਸ਼ਿਕਾਇਤਾਂ',qual:'ਪਾਣੀ ਦੀ ਗੁਣਵੱਤਾ ਅਤੇ ਟੈਂਕ',ana:'ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਰਿਪੋਰਟਾਂ',lab:'ਡਾਟਾ ਲੈਬ',set:'ਸੈਟਿੰਗਾਂ',pub:'ਜਨਤਕ ਪਾਰਦਰਸ਼ਤਾ'};
+T.ur={dash:'ڈیش بورڈ',map:'گاؤں کا نقشہ',leak:'رساؤ کا تجزیہ',comp:'شہری شکایات',qual:'پانی کا معیار اور ٹینک',ana:'تجزیہ اور رپورٹیں',lab:'ڈیٹا لیب',set:'سیٹنگز',pub:'عوامی شفافیت'};
+NV.push(['pub','◍']);
+const TR=[['zones monitored','निगरानी में ज़ोन','ਨਿਗਰਾਨੀ ਅਧੀਨ ਜ਼ੋਨ','زیرِ نگرانی زون'],['active suspected issues','संदिग्ध समस्याएँ','ਸ਼ੱਕੀ ਸਮੱਸਿਆਵਾਂ','مشتبہ مسائل'],['zones needing urgent action','तुरंत कार्रवाई वाले ज़ोन','ਤੁਰੰਤ ਕਾਰਵਾਈ ਵਾਲੇ ਜ਼ੋਨ','فوری کارروائی والے زون'],['conservation score','जल संरक्षण स्कोर','ਜਲ ਸੰਭਾਲ ਸਕੋਰ','آبی تحفظ اسکور'],['network water loss','नेटवर्क जल हानि','ਨੈੱਟਵਰਕ ਪਾਣੀ ਦਾ ਨੁਕਸਾਨ','نیٹ ورک میں پانی کا نقصان'],['water efficiency','जल दक्षता','ਜਲ ਕੁਸ਼ਲਤਾ','آبی کارکردگی'],['households possibly affected','परिवार प्रभावित हो सकते हैं','ਪ੍ਰਭਾਵਿਤ ਹੋ ਸਕਣ ਵਾਲੇ ਪਰਿਵਾਰ','متاثر ہو سکنے والے گھرانے'],['zones normal','ज़ोन सामान्य','ਜ਼ੋਨ ਆਮ','زون معمول کے مطابق'],['Village zones','गाँव के ज़ोन','ਪਿੰਡਾਂ ਦੇ ਜ਼ੋਨ','گاؤں کے زون'],['Zone summary','ज़ोन सारांश','ਜ਼ੋਨ ਸਾਰ','زون کا خلاصہ'],['JalDrishti reads hourly supply, consumption and pressure data to catch leakage, low pressure and supply stoppages early, so water reaches the last household.','JalDrishti हर घंटे के आँकड़ों से रिसाव, कम दबाव और सप्लाई रुकने के संकेत पहले ही पकड़ता है।','ਜਲ ਦ੍ਰਿਸ਼ਟੀ ਹਰ ਘੰਟੇ ਦੇ ਅੰਕੜਿਆਂ ਤੋਂ ਲੀਕੇਜ, ਘੱਟ ਦਬਾਅ ਅਤੇ ਸਪਲਾਈ ਰੁਕਣ ਦੇ ਸੰਕੇਤ ਪਹਿਲਾਂ ਹੀ ਫੜਦੀ ਹੈ, ਤਾਂ ਜੋ ਆਖ਼ਰੀ ਘਰ ਤੱਕ ਪਾਣੀ ਪਹੁੰਚੇ।','جل درشٹی ہر گھنٹے کے اعداد و شمار سے رساؤ، کم دباؤ اور سپلائی رکنے کے اشارے پہلے ہی پکڑ لیتی ہے تاکہ آخری گھر تک پانی پہنچے۔']];
+function tx(h){h=h.replace('हर नल तक पूरा पानी,<br><span class="hi">हर बूँद का हिसाब</span>','हर बूँद पर नज़र,<br><span class="hi">हर घर तक असर</span>');const i={hi:1,pa:2,ur:3}[S.lang];if(i)TR.forEach(r=>{h=h.split(r[0]).join(r[i])});return h}
+const opts=(a,v,ph)=>`<option value="">${ph}</option>`+(v&&!a.includes(v)?[...a,v]:a).map(x=>`<option ${x==v?'selected':''}>${E(x)}</option>`).join('');
+const dls=()=>`<datalist id="dl-d">${[...new Set(Object.values(H).flatMap(d=>Object.keys(d)))].map(x=>`<option value="${E(x)}">`).join('')}</datalist><datalist id="dl-b">${[...new Set(Object.values(H).flatMap(d=>Object.values(d).flat()))].map(x=>`<option value="${E(x)}">`).join('')}</datalist>`;
+S.lg={role:'citizen',s:'',d:'',b:'',n:''};S.loc={s:'',d:'',b:''};S.user=null;
+function login(){const g=S.lg,r=g.role,ns=r=='state'||r=='dm'||r=='block',nd=r=='dm'||r=='block',nb=r=='block';
+return `<div class="bx lgn"><span class="pill">हर घर जल · Har Ghar Jal</span><h1>JalDrishti</h1><p class="sl">${SL}</p>
+<label>${L('role')}<select class="in" data-lg="role">${['central','state','dm','block','citizen'].map(k=>`<option value="${k}" ${k==r?'selected':''}>${L('r_'+k)}</option>`).join('')}</select></label>
+${ns?`<label>${L('state')}<select class="in" data-lg="s">${opts(STATES,g.s,'—')}</select></label>`:''}
+${nd?`<label>${L('district')}<input class="in" data-lg="d" list="dl-d" value="${E(g.d)}"></label>`:''}
+${nb?`<label>${L('block')}<input class="in" data-lg="b" list="dl-b" value="${E(g.b)}"></label>`:''}
+<label>${L('name')}<input class="in" id="lgnm" data-lg="n" value="${E(g.n)}"></label>
+<button class="b" data-a="signin">${L('signin')}</button><p class="er" id="lge"></p><p class="mu">${L('demo')}</p>${dls()}</div>`}
+const can=z=>{const u=S.user;if(!u||u.role=='citizen')return false;if(u.role=='central')return true;const l=LOC[z];return !!l&&l.s==u.s&&(u.role=='state'||l.d==u.d&&(u.role=='dm'||l.b==u.b))};
+const inView=r=>{const l=S.loc,o=LOC[r.z];return(!l.s||o&&o.s==l.s)&&(!l.d||o&&o.d==l.d)&&(!l.b||o&&o.b==l.b)};
+const _rc=window.recompute;window.recompute=function(){const all=DATA;DATA=all.filter(inView);try{_rc()}finally{DATA=all}};
+function fillLoc(){const l=S.loc;$('#fs').innerHTML=opts(STATES,l.s,L('allstates'));$('#fd').innerHTML=opts(Object.keys(H[l.s]||{}),l.d,L('alld'));$('#fb').innerHTML=opts((H[l.s]||{})[l.d]||[],l.b,L('allb'))}
+function stamp(){const u=S.user,by=u?u.name+' ('+L('r_'+u.role)+')':'system';Object.values(AL).forEach(a=>a.hist.forEach(h=>{if(!h[2]){h[2]=1;if(!/^Detected/.test(h[1]))h[1]+=' — by '+by}}));CP.forEach(c=>c.h.forEach(h=>{if(!h[2]){h[2]=1;h[1]+=' — by '+(c.demo?'demo seed':by)}}))}
+function perms(){if(S.page=='leak')document.querySelectorAll('[data-id]').forEach(c=>{const f=F.find(x=>x.id==c.dataset.id);if(f&&!can(f.z)){c.querySelectorAll('.fr,label,button.b').forEach(n=>n.remove());c.insertAdjacentHTML('beforeend',`<p class="mu">${L('ro')}</p>`)}});
+if(S.page=='comp')document.querySelectorAll('[data-a=cadv]').forEach(b=>{const c=CP.find(x=>x.id==b.dataset.v);if(c&&!can(c.z)){const p=b.closest('.fr');p&&p.remove()}})}
+const _d=window.draw;window.draw=function(){document.documentElement.dir=S.lang=='ur'?'rtl':'ltr';document.documentElement.lang=S.lang;document.body.classList.toggle('lo',!S.user);
+if(!S.user){$('#view').innerHTML=tx(login());return}
+_d();$('#pf').textContent=S.user.name+' ▾';$('#view').innerHTML=tx($('#view').innerHTML);perms()};
+V.pub=function(){const au=Object.entries(AL).flatMap(([id,a])=>a.hist.map(h=>[h[0],id.replace('|',' · ')+': '+h[1]])).concat(CP.flatMap(c=>c.h.map(h=>[h[0],c.id+': '+h[1]]))).slice(-15).reverse();
+return `<h2>${T[S.lang].pub}</h2><p class="mu">${L('pub_d')}</p><div class="bx tw"><table><tr><th>Village / zone</th><th>Location</th><th>Issue</th><th>Severity</th><th>Status</th><th>Technician</th><th>Last update</th></tr>${F.map(f=>{const a=AL[f.id],l=LOC[f.z]||{};return `<tr><td>${E(f.z)}</td><td>${E([l.s,l.d,l.b].filter(Boolean).join(' › ')||'—')}</td><td>${f.type}</td><td>${tag(f.sev)}</td><td>${a.st}</td><td>${E(a.tech||'Unassigned')}</td><td>${E(a.hist[a.hist.length-1][0])}</td></tr>`}).join('')||'<tr><td colspan="7">No open issues in the selected area.</td></tr>'}</table></div>
+<div class="bx"><h3>Complaints</h3>${CS.map((s,i)=>`<span class="tg n">${s}: ${CP.filter(c=>c.s==i).length}</span>`).join(' ')}</div>
+<div class="bx"><h3>Audit trail (latest 15)</h3>${au.map(x=>`<div class="tl">${E(x[0])} — ${E(x[1])}</div>`).join('')}</div>`};
+const so=V.set;V.set=()=>so()+`<div class="bx"><h3>Location directory</h3><p class="mu">${STATES.length} states and union territories are built in. Districts, blocks and villages are a small sample. Add yours below, or import the official Local Government Directory (lgdirectory.gov.in) through a backend. A village needs readings in Data Lab to appear on dashboards.</p><div class="fr"><label>State / UT<select class="in" id="as">${opts(STATES,S.user.s,'—')}</select></label><label>District<input class="in" id="ad" list="dl-d" value="${E(S.user.d||'')}"></label><label>Block / tehsil<input class="in" id="ab" list="dl-b" value="${E(S.user.b||'')}"></label><label>Village / zone<input class="in" id="av"></label><button class="b" data-a="addloc">Add location</button></div><p class="er" id="ae"></p><p class="mu">Loaded: ${Object.values(H).reduce((a,d)=>a+Object.keys(d).length,0)} districts, ${Object.keys(LOC).length} villages mapped.</p>${dls()}</div>`;
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a;
+if(a=='signin'){const g=S.lg,r=g.role,n=($('#lgnm').value||'').trim()||L('r_'+r),m=[];if(r!='central'&&r!='citizen'&&!g.s)m.push(L('state'));if((r=='dm'||r=='block')&&!(g.d||'').trim())m.push(L('district'));if(r=='block'&&!(g.b||'').trim())m.push(L('block'));
+if(m.length){$('#lge').textContent='Please select: '+m.join(', ');return}
+S.user={name:n,role:r,s:g.s,d:(g.d||'').trim(),b:(g.b||'').trim()};if(!['state','dm','block'].includes(r)){S.user.s=S.user.d=S.user.b=''}if(r=='state')S.user.d=S.user.b='';if(r=='dm')S.user.b='';
+S.loc={s:S.user.s,d:S.user.d,b:S.user.b};S.page='dash';recompute();fillLoc();draw()}
+else if(a=='prof'){$('#dd').innerHTML=`<b>${E(S.user.name)}</b><p class="mu">${L('r_'+S.user.role)}${S.user.s?' · '+E([S.user.s,S.user.d,S.user.b].filter(Boolean).join(' › ')):''}</p><button class="b" data-a="out">Sign out</button>`}
+else if(a=='out'){S.user=null;$('#dd').hidden=true;draw()}
+else if(a=='addloc'){const s=$('#as').value,d=$('#ad').value.trim(),b=$('#ab').value.trim(),v=$('#av').value.trim(),e=$('#ae');if(!s||!d||!v){e.textContent='State, district and village name are required.';return}
+LOC[v]={s,d,b};if(!can(v)){delete LOC[v];e.textContent='You can only add locations inside your own jurisdiction.';return}
+H[s]=H[s]||{};H[s][d]=H[s][d]||[];if(b&&!H[s][d].includes(b))H[s][d].push(b);recompute();fillLoc();draw()}
+if(['ack','save','cadv','csub'].includes(a))setTimeout(()=>{stamp();draw()},60)},true);
+document.addEventListener('change',e=>{const k=e.target.dataset.lg;if(!k)return;const g=S.lg;g[k]=e.target.value;if(k=='role')g.s=g.d=g.b='';if(k=='s')g.d=g.b='';if(k=='d')g.b='';if(k!='n')draw()});
+$('#sc').insertAdjacentHTML('beforebegin','<select id="fs" aria-label="State"></select><select id="fd" aria-label="District"></select><select id="fb" aria-label="Block"></select>');
+['fs','fd','fb'].forEach((id,i)=>$('#'+id).onchange=e=>{const l=S.loc;l['sdb'[i]]=e.target.value;if(i==0){l.d='';l.b=''}if(i==1)l.b='';recompute();fillLoc();draw()});
+$('#ln').innerHTML='<option value="en">English</option><option value="hi">हिन्दी</option><option value="pa">ਪੰਜਾਬੀ</option><option value="ur">اردو</option>';
+fillLoc();
+const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Yatra+One&family=Noto+Sans+Gurmukhi:wght@400;600&family=Noto+Nastaliq+Urdu&display=swap';document.head.appendChild(l);
+const st=document.createElement('style');st.textContent=`:root{--fh:"Yatra One","Noto Sans Gurmukhi","Noto Nastaliq Urdu","Hind",serif}
+body{font-family:"Hind","Noto Sans Gurmukhi","Noto Nastaliq Urdu","Segoe UI",system-ui,sans-serif;background-image:radial-gradient(circle at 8% 4%,rgba(255,153,51,.4),transparent 38%),radial-gradient(circle at 92% 10%,rgba(110,80,230,.3),transparent 40%),radial-gradient(circle at 82% 96%,rgba(19,160,60,.3),transparent 42%),radial-gradient(circle at 8% 92%,rgba(7,180,200,.34),transparent 40%),repeating-radial-gradient(circle at 50% 120%,transparent 0 26px,rgba(7,137,154,.06) 26px 28px)}
+[dir=rtl] body{line-height:1.9}.hero{background:linear-gradient(120deg,#052c42 0%,#0a7a8c 55%,#e8801a 150%)}
+header select{max-width:150px}.lo aside,.lo #dm{display:none}.lo header>*:not(#ln){display:none}
+.lgn{max-width:460px;margin:30px auto;display:grid;gap:10px}.lgn h1{font:700 2.4rem var(--fh);margin:0}.lgn .sl{font:1.2rem var(--fh);color:var(--sa);margin:0}.lgn label{display:grid;gap:3px;font-size:.85rem;color:var(--mut)}`;
+document.head.appendChild(st);
+stamp();draw();
+})();
+</script>
+<script>
+(function(){
+const LANGS=[['en','English'],['as','অসমীয়া'],['bn','বাংলা'],['brx','बड़ो'],['doi','डोगरी'],['gu','ગુજરાતી'],['hi','हिन्दी'],['kn','ಕನ್ನಡ'],['ks','کٲشُر'],['kok','कोंकणी'],['mai','मैथिली'],['ml','മലയാളം'],['mni','ꯃꯤꯇꯩꯂꯣꯟ'],['mr','मराठी'],['ne','नेपाली'],['or','ଓଡ଼ିଆ'],['pa','ਪੰਜਾਬੀ'],['sa','संस्कृतम्'],['sat','ᱥᱟᱱᱛᱟᱲᱤ'],['sd','سنڌي'],['ta','தமிழ்'],['te','తెలుగు'],['ur','اردو']];
+const NAVL={
+as:['ড্যাশবোর্ড','মানচিত্ৰ','ফুটা বিশ্লেষণ','অভিযোগ','পানীৰ মান','বিশ্লেষণ','ডাটা','ছেটিং','স্বচ্ছতা'],
+bn:['ড্যাশবোর্ড','মানচিত্র','লিকেজ বিশ্লেষণ','অভিযোগ','জলের মান','বিশ্লেষণ','ডেটা','সেটিংস','স্বচ্ছতা'],
+gu:['ડેશબોર્ડ','નકશો','લીકેજ વિશ્લેષણ','ફરિયાદો','પાણીની ગુણવત્તા','વિશ્લેષણ','ડેટા','સેટિંગ્સ','પારદર્શિતા'],
+kn:['ಡ್ಯಾಶ್‌ಬೋರ್ಡ್','ನಕ್ಷೆ','ಸೋರಿಕೆ ವಿಶ್ಲೇಷಣೆ','ದೂರುಗಳು','ನೀರಿನ ಗುಣಮಟ್ಟ','ವಿಶ್ಲೇಷಣೆ','ಡೇಟಾ','ಸೆಟ್ಟಿಂಗ್‌ಗಳು','ಪಾರದರ್ಶಕತೆ'],
+kok:['डॅशबोर्ड','नकाशो','गळती विश्लेषण','तक्रारी','उदकाची गुणवत्ता','विश्लेषण','डेटा','सेटिंग्स','पारदर्शकताय'],
+mai:['डैशबोर्ड','नक्शा','रिसाव विश्लेषण','शिकायत','पानिक गुणवत्ता','विश्लेषण','डेटा','सेटिंग','पारदर्शिता'],
+ml:['ഡാഷ്ബോർഡ്','മാപ്പ്','ചോർച്ച വിശകലനം','പരാതികൾ','ജലഗുണനിലവാരം','വിശകലനം','ഡാറ്റ','ക്രമീകരണങ്ങൾ','സുതാര്യത'],
+mr:['डॅशबोर्ड','नकाशा','गळती विश्लेषण','तक्रारी','पाण्याची गुणवत्ता','विश्लेषण','डेटा','सेटिंग्ज','पारदर्शकता'],
+ne:['ड्यासबोर्ड','नक्सा','चुहावट विश्लेषण','उजुरी','पानीको गुणस्तर','विश्लेषण','डेटा','सेटिङ','पारदर्शिता'],
+or:['ଡ୍ୟାସବୋର୍ଡ','ମାନଚିତ୍ର','ଲିକେଜ ବିଶ୍ଳେଷଣ','ଅଭିଯୋଗ','ଜଳ ଗୁଣବତ୍ତା','ବିଶ୍ଳେଷଣ','ଡାଟା','ସେଟିଂସ','ସ୍ୱଚ୍ଛତା'],
+sa:['फलकम्','मानचित्रम्','स्रवणविश्लेषणम्','परिवेदनानि','जलगुणवत्ता','विश्लेषणम्','दत्तांशः','विन्यासाः','पारदर्शिता'],
+sd:['ڊيش بورڊ','نقشو','ليڪيج جو تجزيو','شڪايتون','پاڻيءَ جو معيار','تجزيو','ڊيٽا','سيٽنگون','شفافيت'],
+ta:['டாஷ்போர்டு','வரைபடம்','கசிவு பகுப்பாய்வு','புகார்கள்','நீரின் தரம்','பகுப்பாய்வு','தரவு','அமைப்புகள்','வெளிப்படைத்தன்மை'],
+te:['డాష్‌బోర్డ్','మ్యాప్','లీకేజీ విశ్లేషణ','ఫిర్యాదులు','నీటి నాణ్యత','విశ్లేషణ','డేటా','సెట్టింగ్‌లు','పారదర్శకత']};
+const NK=['dash','map','leak','comp','qual','ana','lab','set','pub'];
+LANGS.forEach(([c])=>{if(!T[c])T[c]=Object.assign({},T.en)});
+Object.entries(NAVL).forEach(([c,a])=>NK.forEach((k,i)=>T[c][k]=a[i]));
+const SLG={en:['Every drop watched,','every home reached'],hi:['हर बूँद पर नज़र,','हर घर तक असर'],pa:['ਹਰ ਬੂੰਦ ਉੱਤੇ ਨਜ਼ਰ,','ਹਰ ਘਰ ਤੱਕ ਅਸਰ'],ur:['ہر بوند پر نظر،','ہر گھر تک اثر']};
+const PILL={en:'Har Ghar Jal · Water for every home',hi:'हर घर जल',pa:'ਹਰ ਘਰ ਜਲ',ur:'ہر گھر جل'};
+const BR={en:'Smart Water Intelligence',hi:'स्मार्ट जल प्रबंधन',pa:'ਸਮਾਰਟ ਜਲ ਪ੍ਰਬੰਧਨ',ur:'اسمارٹ آبی انتظام'};
+const MK='mob,send,otp,verify,signup,have,newh,badm,notreg,badotp,exp,demo,offs,name,in'.split(',');
+const MS={
+en:['Mobile number','Send OTP','Enter the 6-digit OTP','Verify and continue','Sign up as citizen','Already registered? Sign in','New here? Sign up','Enter a valid 10-digit Indian mobile number (starts with 6–9).','This number is not registered. Sign up first.','Wrong OTP.','OTP expired or too many wrong tries. Request a new one.','Demo mode: no SMS is sent, so the OTP is shown here:','Demo officer numbers: 9000000001 (Central), 9000000002 (State), 9000000003 (DM), 9000000004 (Block).','Your name','Sign in'],
+hi:['मोबाइल नंबर','OTP भेजें','6 अंकों का OTP दर्ज करें','सत्यापित करें और आगे बढ़ें','नागरिक के रूप में साइन अप करें','पहले से पंजीकृत हैं? साइन इन करें','नए हैं? साइन अप करें','सही 10 अंकों का भारतीय मोबाइल नंबर दर्ज करें (6–9 से शुरू)।','यह नंबर पंजीकृत नहीं है। पहले साइन अप करें।','गलत OTP।','OTP की अवधि समाप्त या बहुत ग़लत प्रयास। नया OTP मँगाएँ।','डेमो मोड: SMS नहीं भेजा जाता, इसलिए OTP यहाँ दिख रहा है:','डेमो अधिकारी नंबर: 9000000001 (केंद्र), 9000000002 (राज्य), 9000000003 (DM), 9000000004 (ब्लॉक)।','आपका नाम','साइन इन'],
+pa:['ਮੋਬਾਈਲ ਨੰਬਰ','OTP ਭੇਜੋ','6 ਅੰਕਾਂ ਦਾ OTP ਦਰਜ ਕਰੋ','ਤਸਦੀਕ ਕਰੋ ਅਤੇ ਅੱਗੇ ਵਧੋ','ਨਾਗਰਿਕ ਵਜੋਂ ਸਾਈਨ ਅੱਪ ਕਰੋ','ਪਹਿਲਾਂ ਤੋਂ ਰਜਿਸਟਰ ਹੋ? ਸਾਈਨ ਇਨ ਕਰੋ','ਨਵੇਂ ਹੋ? ਸਾਈਨ ਅੱਪ ਕਰੋ','ਸਹੀ 10 ਅੰਕਾਂ ਦਾ ਭਾਰਤੀ ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ (6–9 ਤੋਂ ਸ਼ੁਰੂ)।','ਇਹ ਨੰਬਰ ਰਜਿਸਟਰ ਨਹੀਂ ਹੈ। ਪਹਿਲਾਂ ਸਾਈਨ ਅੱਪ ਕਰੋ।','ਗਲਤ OTP।','OTP ਦੀ ਮਿਆਦ ਖ਼ਤਮ ਜਾਂ ਬਹੁਤ ਗਲਤ ਕੋਸ਼ਿਸ਼ਾਂ। ਨਵਾਂ OTP ਮੰਗੋ।','ਡੈਮੋ ਮੋਡ: SMS ਨਹੀਂ ਭੇਜਿਆ ਜਾਂਦਾ, ਇਸ ਲਈ OTP ਇੱਥੇ ਦਿਖਾਇਆ ਗਿਆ ਹੈ:','ਡੈਮੋ ਅਧਿਕਾਰੀ ਨੰਬਰ: 9000000001 (ਕੇਂਦਰ), 9000000002 (ਰਾਜ), 9000000003 (DM), 9000000004 (ਬਲਾਕ)।','ਤੁਹਾਡਾ ਨਾਮ','ਸਾਈਨ ਇਨ'],
+ur:['موبائل نمبر','OTP بھیجیں','6 ہندسوں کا OTP درج کریں','تصدیق کریں اور آگے بڑھیں','شہری کے طور پر سائن اپ کریں','پہلے سے رجسٹرڈ ہیں؟ سائن ان کریں','نئے ہیں؟ سائن اپ کریں','درست 10 ہندسوں کا بھارتی موبائل نمبر درج کریں (6–9 سے شروع)۔','یہ نمبر رجسٹرڈ نہیں ہے۔ پہلے سائن اپ کریں۔','غلط OTP۔','OTP کی میعاد ختم یا بہت غلط کوششیں۔ نیا OTP منگوائیں۔','ڈیمو موڈ: SMS نہیں بھیجا جاتا، اس لیے OTP یہاں دکھایا گیا ہے:','ڈیمو افسر نمبر: 9000000001 (مرکز)، 9000000002 (ریاست)، 9000000003 (DM)، 9000000004 (بلاک)۔','آپ کا نام','سائن ان']};
+const M=k=>{const i=MK.indexOf(k);return (MS[S.lang]||MS.en)[i]};
+const UR={'9000000001':{name:'Central Officer (demo)',role:'central',s:'',d:'',b:''},'9000000002':{name:'Punjab State Officer (demo)',role:'state',s:'Punjab',d:'',b:''},'9000000003':{name:'Ludhiana DM (demo)',role:'dm',s:'Punjab',d:'Ludhiana',b:''},'9000000004':{name:'Doraha Block Officer (demo)',role:'block',s:'Punjab',d:'Ludhiana',b:'Doraha'}};
+let REG={};try{REG=JSON.parse(localStorage.getItem('jd_users')||'{}');Object.assign(UR,REG)}catch(e){}
+S.au={m:'in',step:'f',mob:'',name:'',otp:'',exp:0,tries:0,err:''};
+function login2(){const a=S.au,up=a.m=='up',o=a.step=='o';
+return `<div class="bx lgn"><span class="pill">${PILL[S.lang]||PILL.en}</span><h1>JalDrishti</h1><p class="sl">${(SLG[S.lang]||SLG.en).join(' ')}</p><h3>${up?M('signup'):M('in')}</h3>
+${up&&!o?`<label>${M('name')}<input class="in" id="an" value="${E(a.name)}" autocomplete="name"></label>`:''}
+<label>${M('mob')}<span class="mb"><b>+91</b><input class="in" id="am" inputmode="numeric" maxlength="10" value="${E(a.mob)}" ${o?'readonly':''} autocomplete="tel-national"></span></label>
+${o?`<p class="demo">${M('demo')} <b>${a.otp}</b></p><label>${M('otp')}<input class="in" id="ao" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></label><button class="b" data-a="vfy">${M('verify')}</button>`:`<button class="b" data-a="snd">${M('send')}</button>`}
+<p class="er" role="alert">${E(a.err)}</p><button class="b g2b" data-a="swm">${up?M('have'):M('newh')}</button><p class="mu">${M('offs')}</p></div>`}
+function enter(u,mob){S.lg={role:u.role,s:u.s,d:u.d,b:u.b,n:u.name};const i=document.createElement('input');i.id='lgnm';i.value=u.name;i.hidden=true;document.body.appendChild(i);const b=document.createElement('button');b.dataset.a='signin';document.body.appendChild(b);b.click();b.remove();i.remove();if(S.user)S.user.mobile=mob}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t||S.user)return;const a=S.au,x=t.dataset.a,up=a.m=='up';
+if(x=='swm'){a.m=up?'in':'up';a.step='f';a.err='';draw()}
+else if(x=='snd'){const mob=($('#am').value||'').trim(),nm=up?($('#an').value||'').trim():a.name;a.mob=mob;a.name=nm;
+if(!/^[6-9]\d{9}$/.test(mob))a.err=M('badm');else if(up&&nm.length<2)a.err=M('name');else if(!up&&!UR[mob])a.err=M('notreg');else if(up&&UR[mob])a.err=M('have');
+else{a.otp=String(crypto.getRandomValues(new Uint32Array(1))[0]%900000+100000);a.exp=Date.now()+3e5;a.tries=0;a.step='o';a.err=''}draw()}
+else if(x=='vfy'){const c=($('#ao').value||'').trim();
+if(Date.now()>a.exp||a.tries>=3){a.err=M('exp');a.step='f';draw();return}
+if(c!==a.otp){a.tries++;a.err=a.tries>=3?M('exp'):M('badotp')+' ('+(3-a.tries)+')';if(a.tries>=3)a.step='f';draw();return}
+const mob=a.mob;if(up){UR[mob]=REG[mob]={name:a.name,role:'citizen',s:'',d:'',b:''};try{localStorage.setItem('jd_users',JSON.stringify(REG))}catch(e){}}
+a.step='f';a.otp='';enter(UR[mob],mob)}});
+$('#ln').innerHTML=LANGS.map(([c,n])=>`<option value="${c}">${n}</option>`).join('');
+const rtl=()=>['ur','ks','sd'].includes(S.lang);
+const _p=window.draw;
+window.draw=function(){document.documentElement.lang=S.lang;
+if(!S.user){document.documentElement.dir=rtl()?'rtl':'ltr';document.body.classList.add('lo');$('#view').innerHTML=login2();return}
+_p();document.documentElement.dir=rtl()?'rtl':'ltr';const g=SLG[S.lang]||SLG.en;
+$('#view').innerHTML=$('#view').innerHTML.replace('हर बूँद पर नज़र,<br><span class="hi">हर घर तक असर</span>',g[0]+'<br><span class="hi">'+g[1]+'</span>').replace('हर घर जल · Har Ghar Jal',PILL[S.lang]||PILL.en);
+$('.br small').textContent=BR[S.lang]||BR.en};
+const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali&family=Noto+Sans+Gujarati&family=Noto+Sans+Kannada&family=Noto+Sans+Malayalam&family=Noto+Sans+Oriya&family=Noto+Sans+Tamil&family=Noto+Sans+Telugu&family=Noto+Sans+Meetei+Mayek&family=Noto+Sans+Ol+Chiki&family=Noto+Naskh+Arabic&display=swap';document.head.appendChild(l);
+const st=document.createElement('style');st.textContent=`body{font-family:"Hind","Noto Sans Gurmukhi","Noto Nastaliq Urdu","Noto Naskh Arabic","Noto Sans Bengali","Noto Sans Gujarati","Noto Sans Kannada","Noto Sans Malayalam","Noto Sans Oriya","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Meetei Mayek","Noto Sans Ol Chiki","Segoe UI",system-ui,sans-serif}.mb{display:flex;gap:8px;align-items:center}.mb input{flex:1}.demo{background:#fff1cc;color:#4d3300;border-radius:8px;padding:8px;margin:0}.demo b{font:700 1.4rem Consolas,monospace;letter-spacing:3px}`;document.head.appendChild(st);
+S.lang='en';$('#ln').value='en';draw();
+})();
+</script></body></html>
