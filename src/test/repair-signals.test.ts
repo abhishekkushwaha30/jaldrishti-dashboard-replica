@@ -16,7 +16,7 @@ describe("Demo repair signals", () => {
       AL[f.id].st='Repaired';refreshSignals();
       return [signal(f),R.Rampur.worst,R.Rampur.loss===loss];
     })()`);
-    expect(Array.from(result)).toEqual(["Normal", "Normal", true]);
+    expect(result).toEqual(["Normal", "Normal", true]);
     dom.window.close();
   });
   it("does not clear another unresolved issue in the same zone", () => {
@@ -37,7 +37,7 @@ describe("Demo repair signals", () => {
       const engineer=canRepair('Rampur');
       S.user={role:'citizen'};return [engineer,canRepair('Rampur')];
     })()`);
-    expect(Array.from(result)).toEqual([true, false]);
+    expect(result).toEqual([true, false]);
     dom.window.close();
   });
 });
