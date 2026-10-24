@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the existing standalone academic-demo repair workflow in the embedded dashboard; derive alert, work-order and zone signals from repair status without changing historical sensor readings.
