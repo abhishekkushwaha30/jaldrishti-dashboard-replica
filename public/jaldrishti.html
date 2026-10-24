@@ -387,16 +387,20 @@ ur:['موبائل نمبر','OTP بھیجیں','6 ہندسوں کا OTP درج �
 const M=k=>{const i=MK.indexOf(k);return (MS[S.lang]||MS.en)[i]};
 const UR={'9000000001':{name:'Central Officer (demo)',role:'central',s:'',d:'',b:''},'9000000002':{name:'Punjab State Officer (demo)',role:'state',s:'Punjab',d:'',b:''},'9000000003':{name:'Ludhiana DM (demo)',role:'dm',s:'Punjab',d:'Ludhiana',b:''},'9000000004':{name:'Doraha Block Officer (demo)',role:'block',s:'Punjab',d:'Ludhiana',b:'Doraha'}};
 let REG={};try{REG=JSON.parse(localStorage.getItem('jd_users')||'{}');Object.assign(UR,REG)}catch(e){}
-S.au={m:'in',step:'f',mob:'',name:'',otp:'',exp:0,tries:0,err:''};
-function login2(){const a=S.au,up=a.m=='up',o=a.step=='o';
-return `<div class="bx lgn"><span class="pill">${PILL[S.lang]||PILL.en}</span><h1>JalDrishti</h1><p class="sl">${(SLG[S.lang]||SLG.en).join(' ')}</p><h3>${up?M('signup'):M('in')}</h3>
+const SU={'CEN001':['9000000001','central@123'],'STA001':['9000000002','state@123'],'DM001':['9000000003','dm@123'],'BLK001':['9000000004','block@123'],'JE001':['9000000005','je@123']};UR['9000000005']={name:'JE R. Verma, Field Engineer (demo)',role:'block',s:'Punjab',d:'Ludhiana',b:'Doraha'};
+S.au={tab:'pub',m:'in',step:'f',mob:'',name:'',otp:'',exp:0,tries:0,err:''};
+function login2(){const a=S.au,up=a.m=='up',o=a.step=='o';const TB=`<div class="fr" role="tablist"><button class="b ${a.tab=='pub'?'':'g2b'}" data-a="tab" data-v="pub" role="tab" aria-selected="${a.tab=='pub'}">👤 Public / Citizen login</button><button class="b ${a.tab=='stf'?'':'g2b'}" data-a="tab" data-v="stf" role="tab" aria-selected="${a.tab=='stf'}">🛠 Staff / Officer login</button></div>`;if(a.tab=='stf')return `<div class="bx lgn"><span class="pill">${PILL[S.lang]||PILL.en}</span><h1>JalDrishti</h1>${TB}<h3>Staff / Officer sign in</h3><label>Employee ID<input class="in" id="sid" autocomplete="username" placeholder="e.g. JE001"></label><label>Password<input class="in" id="spw" type="password" autocomplete="current-password"></label><button class="b" data-a="slog">Sign in as staff</button><p class="er" role="alert">${E(a.err)}</p><p class="demo">Demo staff accounts: CEN001 / central@123 (Central) · STA001 / state@123 (State) · DM001 / dm@123 (District) · BLK001 / block@123 (Block) · JE001 / je@123 (Field engineer)</p></div>`;
+return `<div class="bx lgn"><span class="pill">${PILL[S.lang]||PILL.en}</span><h1>JalDrishti</h1><p class="sl">${(SLG[S.lang]||SLG.en).join(' ')}</p>${TB}
+<h3>${up?M('signup'):M('in')}</h3>
 ${up&&!o?`<label>${M('name')}<input class="in" id="an" value="${E(a.name)}" autocomplete="name"></label>`:''}
 <label>${M('mob')}<span class="mb"><b>+91</b><input class="in" id="am" inputmode="numeric" maxlength="10" value="${E(a.mob)}" ${o?'readonly':''} autocomplete="tel-national"></span></label>
 ${o?`<p class="demo">${M('demo')} <b>${a.otp}</b></p><label>${M('otp')}<input class="in" id="ao" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></label><button class="b" data-a="vfy">${M('verify')}</button>`:`<button class="b" data-a="snd">${M('send')}</button>`}
-<p class="er" role="alert">${E(a.err)}</p><button class="b g2b" data-a="swm">${up?M('have'):M('newh')}</button><p class="mu">${M('offs')}</p></div>`}
+<p class="er" role="alert">${E(a.err)}</p><button class="b g2b" data-a="swm">${up?M('have'):M('newh')}</button></div>`}
 function enter(u,mob){S.lg={role:u.role,s:u.s,d:u.d,b:u.b,n:u.name};const i=document.createElement('input');i.id='lgnm';i.value=u.name;i.hidden=true;document.body.appendChild(i);const b=document.createElement('button');b.dataset.a='signin';document.body.appendChild(b);b.click();b.remove();i.remove();if(S.user)S.user.mobile=mob}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t||S.user)return;const a=S.au,x=t.dataset.a,up=a.m=='up';
-if(x=='swm'){a.m=up?'in':'up';a.step='f';a.err='';draw()}
+if(x=='tab'){a.tab=t.dataset.v;a.err='';a.step='f';draw()}
+else if(x=='slog'){const id=($('#sid').value||'').trim().toUpperCase(),pw=$('#spw').value||'',r=SU[id];if(!r||r[1]!==pw){a.err='Wrong employee ID or password.';draw();return}a.err='';enter(UR[r[0]],r[0])}
+else if(x=='swm'){a.m=up?'in':'up';a.step='f';a.err='';draw()}
 else if(x=='snd'){const mob=($('#am').value||'').trim(),nm=up?($('#an').value||'').trim():a.name;a.mob=mob;a.name=nm;
 if(!/^[6-9]\d{9}$/.test(mob))a.err=M('badm');else if(up&&nm.length<2)a.err=M('name');else if(!up&&!UR[mob])a.err=M('notreg');else if(up&&UR[mob])a.err=M('have');
 else{a.otp=String(crypto.getRandomValues(new Uint32Array(1))[0]%900000+100000);a.exp=Date.now()+3e5;a.tries=0;a.step='o';a.err=''}draw()}
